@@ -785,20 +785,20 @@ setTimeout(createConfetti, 1000);
 /* ===============================
    19. PREVENT ZOOM ON MOBILE (Optional)
 =============================== */
-(function preventZoom() {
-  document.addEventListener('gesturestart', function (e) {
-    e.preventDefault();
-  });
-  document.addEventListener(
-    'touchmove',
-    function (e) {
-      if (e.scale !== 1) {
-        e.preventDefault();
-      }
-    },
-    { passive: false },
-  );
-})();
+// (function preventZoom() {
+//   document.addEventListener('gesturestart', function (e) {
+//     e.preventDefault();
+//   });
+//   document.addEventListener(
+//     'touchmove',
+//     function (e) {
+//       if (e.scale !== 1) {
+//         e.preventDefault();
+//       }
+//     },
+//     { passive: false },
+//   );
+// })();
 /* ===============================
    20. EASTER EGG - KONAMI CODE
 =============================== */
