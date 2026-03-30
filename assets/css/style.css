@@ -7,37 +7,28 @@
   src: url("../font/Breathing.ttf");
 }
 :root {
-  /* Mocha Colors */
   --mocha-dark: #6F4E37;
   --mocha-medium: #8B6F47;
   --mocha-light: #C8AD7F;
   --latte: #F5DEB3;
-  /* Pink Romantic */
   --pink-soft: #FFE4E1;
   --pink-medium: #FFC0CB;
   --pink-accent: #FFB6C1;
   --rose: #E8C3B9;
-  /* Neutrals */
   --cream: #FFF8F3;
   --beige: #FAF7F5;
   --white: #FFFFFF;
   --text: #4A3F35;
   --text-light: #8B7E74;
-  /* Aliases untuk compatibility */
   --primary: var(--mocha-medium);
   --secondary: var(--pink-soft);
   --accent: var(--mocha-dark);
   --bg: var(--cream);
-  /* Shadows */
   --shadow-sm: 0 2px 8px rgba(111, 78, 55, 0.1);
   --shadow-md: 0 4px 16px rgba(111, 78, 55, 0.12);
   --shadow-lg: 0 8px 32px rgba(111, 78, 55, 0.15);
-  /* Transitions */
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-/* ========================================
-   🎯 BASE STYLES
-======================================== */
 /* ========================================
    🎯 BASE STYLES
 ======================================== */
@@ -45,85 +36,22 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 html {
-  scroll-behavior: smooth; /* ✅ TAMBAHKAN INI */
-  overflow-x: hidden;      /* ✅ TAMBAHKAN INI */
-  max-width: 100vw;        /* ✅ TAMBAHKAN INI */
-}
-/* ========================================
-   📱 MOBILE SCROLL FIX
-======================================== */
-@media (max-width: 768px) {
-  html {
-    overflow: auto; /* ✅ Allow scroll */
-    height: auto;
-    min-height: 100vh;
-  }
-  body {
-    overflow: auto; /* ✅ Allow scroll */
-    min-height: 100vh;
-    height: auto;
-    position: relative;
-  }
-  /* ========================================
-   📄 MAIN CONTAINER - SMOOTH SCROLL
-======================================== */
-#mainContainer {
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: 100vh;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch; /* iOS momentum scroll */
-  /* ✅ GPU ACCELERATION */
-  transform: translateZ(0);
-  will-change: scroll-position;
-  backface-visibility: hidden;
-  perspective: 1000px;
-  /* ✅ SMOOTH RENDERING */
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-}
-/* ========================================
-   📄 SECTIONS - GPU OPTIMIZATION
-======================================== */
-.snap-section {
-  padding: 80px 20px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
   overflow-x: hidden;
   max-width: 100vw;
-  /* ✅ GPU ACCELERATION */
-  transform: translateZ(0);
-  will-change: transform;
-  backface-visibility: hidden;
-}
-/* ✅ REDUCE PAINT di Mobile */
-@media (max-width: 768px) {
-  .snap-section {
-    padding: 60px 16px;
-    min-height: auto;
-  }
-  /* Simplify animations on mobile */
-  .snap-section * {
-    animation-duration: 0.3s !important; /* Faster animations */
-  }
-}
-  #sectionHero {
-    min-height: 100vh; /* ✅ Hero tetap full */
-  }
+  height: 100%;
 }
 body {
   margin: 0;
   background: linear-gradient(135deg, var(--cream) 0%, var(--pink-soft) 100%);
   color: var(--text);
   font-family: 'Poppins', sans-serif;
-  overflow-x: hidden; /* ✅ TAMBAHKAN INI */
-  max-width: 100vw;   /* ✅ TAMBAHKAN INI */
+  overflow-x: hidden;
+  max-width: 100vw;
+  min-height: 100vh;
+  position: relative;
 }
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
@@ -143,17 +71,23 @@ body {
   background: var(--pink-accent);
   color: white;
 }
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+iframe {
+  max-width: 100%;
+  display: block;
+}
+
 /* ========================================
-   💌 ENVELOPE INTERACTIVE ANIMATION
+   💌 ENVELOPE SCREEN
 ======================================== */
 #envelopeScreen {
   position: fixed;
   inset: 0;
-  background: linear-gradient(135deg, 
-    #FFE4E1 0%, 
-    #F5DEB3 50%, 
-    #FFE4E1 100%
-  );
+  background: linear-gradient(135deg, #FFE4E1 0%, #F5DEB3 50%, #FFE4E1 100%);
   background-size: 200% 200%;
   animation: gradientShift 8s ease infinite;
   display: flex;
@@ -172,30 +106,39 @@ body {
   transform: scale(0.9);
   pointer-events: none;
 }
+.envelope-scene {
+  position: relative;
+  text-align: center;
+  animation: sceneEntrance 1s ease;
+}
+@keyframes sceneEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
 /* ========================================
-   🌟 FLOATING HEARTS BACKGROUND
-======================================== */
-/* ========================================
-   💕 FLOATING HEARTS - PASS THROUGH
+   💕 FLOATING HEARTS
 ======================================== */
 .hearts-float {
   position: absolute;
   inset: 0;
-  /* ✅ FIX: Di depan envelope */
-  z-index: 25; /* Above flap (20) */
-  overflow: visible; /* ✅ Jangan clip */
+  z-index: 25;
+  overflow: visible;
   pointer-events: none;
 }
 .hearts-float span {
   position: absolute;
   font-size: 24px;
-  /* ✅ Opacity dikurangi biar ga ganggu view */
-  opacity: 0.2; /* Lebih samar pas lewat envelope */
+  opacity: 0.2;
   color: #FFB6C1;
   animation: floatHeart 8s linear infinite;
   z-index: 25;
 }
-/* Positions sama */
 .hearts-float span:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 7s; }
 .hearts-float span:nth-child(2) { left: 30%; animation-delay: 1s; animation-duration: 9s; }
 .hearts-float span:nth-child(3) { left: 50%; animation-delay: 2s; animation-duration: 8s; }
@@ -224,71 +167,37 @@ body {
   }
 }
 /* ========================================
-   📦 ENVELOPE SCENE
+   📦 ENVELOPE CONTAINER
 ======================================== */
-.envelope-scene {
-  position: relative;
-  text-align: center;
-  animation: sceneEntrance 1s ease;
-}
-@keyframes sceneEntrance {
-  from {
-    opacity: 0;
-    transform: translateY(50px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-/* ========================================
-   💌 CARD - FULL VISIBLE VERSION
-======================================== */
-/* ✅ ENVELOPE CONTAINER - LARGER */
 .envelope-container {
   width: 340px;
-  height: 260px; /* ✅ Increased height */
+  height: 260px;
   position: relative;
   perspective: 1200px;
   margin: 0 auto 30px;
   transition: transform 0.3s ease;
 }
-/* ✅ CARD - POSITIONED TO SHOW FULLY */
 .env-card {
   position: absolute;
   left: 8%;
-  top: 10%; /* ✅ Start higher */
+  top: 10%;
   width: 84%;
-  max-height: 500px; /* ✅ Limit height */
+  max-height: 500px;
   background: white;
-  padding: 20px 40px 50px; /* ✅ Adjusted padding */
+  padding: 20px 40px 50px;
   border-radius: 16px;
-  transform: translateY(0); /* ✅ Start visible inside */
+  transform: translateY(0);
   opacity: 1;
   z-index: 5;
   box-shadow: 
     0 10px 30px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
   transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-  overflow: hidden; /* ✅ Prevent content overflow */
+  overflow: hidden;
 }
-/* ✅ CARD SLIDES OUT - ADJUSTED DISTANCE */
 .env-card.card-out {
-  transform: translateY(-200px); /* ✅ Slides out further */
-  animation: cardFloat 2s ease-in-out 1.2s infinite;
+  transform: translateY(-200px);
 }
-@keyframes cardFloat {
-  0%, 100% { 
-    transform: translateY(-200px); 
-  }
-  50% { 
-    transform: translateY(-200px); 
-  }
-}
-/* ========================================
-   📝 CARD CONTENT - RESPONSIVE TEXT
-======================================== */
-/* Card Header */
 .card-header {
   margin-bottom: 10px;
 }
@@ -318,7 +227,6 @@ body {
   font-weight: 700;
   text-align: center;
   line-height: 1.3;
-  /* ✅ Handle long names */
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
@@ -336,10 +244,6 @@ body {
   font-size: 13px;
   color: var(--pink-medium);
 }
-/* ========================================
-   📐 BACK & FRONT - ADJUSTED HEIGHT
-======================================== */
-/* BACK */
 .env-back {
   position: absolute;
   inset: 0;
@@ -350,7 +254,6 @@ body {
     0 15px 40px rgba(111, 78, 55, 0.3),
     inset 0 2px 10px rgba(255, 255, 255, 0.1);
 }
-/* FRONT */
 .env-front {
   position: absolute;
   inset: 0;
@@ -359,19 +262,16 @@ body {
   z-index: 10;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
 }
-/* ========================================
-   🔺 FLAP - ADJUSTED FOR TALLER ENVELOPE
-======================================== */
 .env-flap {
   position: absolute;
-  top: -130px; /* ✅ Adjusted for taller envelope */
+  top: -130px;
   left: 0;
   z-index: 20;
   width: 0;
   height: 0;
   border-left: 170px solid transparent;
   border-right: 170px solid transparent;
-  border-bottom: 130px solid var(--mocha-light); /* ✅ Taller flap */
+  border-bottom: 130px solid var(--mocha-light);
   transform-origin: bottom;
   transform: rotateX(180deg);
   transition: transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -381,19 +281,12 @@ body {
   transform: rotateX(0deg);
   z-index: 0;
 }
-/* Wax Seal - Adjusted Position */
-/* ========================================
-   💕 WAX SEAL - SMOOTH FADE WITH TIMING
-======================================== */
-/* ========================================
-   💕 WAX SEAL - RESPONSIVE POSITION FIX
-======================================== */
 .env-flap::after {
   content: '💕';
   position: absolute;
-  bottom: -24px;        /* ✅ UBAH: dari top ke bottom */
+  bottom: -24px;
   left: 50%;
-  transform: translateX(-50%); /* ✅ PASTIKAN INI ADA */
+  transform: translateX(-50%);
   font-size: 26px;
   background: var(--pink-accent);
   width: 48px;
@@ -405,17 +298,13 @@ body {
   box-shadow: 
     0 4px 12px rgba(255, 182, 193, 0.6),
     inset 0 2px 5px rgba(255, 255, 255, 0.3);
-  /* ✅ INITIAL STATE */
   opacity: 1;
-  /* ✅ SPIN ANIMATION */
   animation: sealSpinSmooth 3s linear infinite;
-  /* ✅ TRANSITION untuk fade out */
   transition: 
     opacity 1.2s ease-in-out 0s,
     transform 1.2s cubic-bezier(0.34, 1.3, 0.64, 1) 0s;
   z-index: 5;
 }
-/* ✅ SPIN ANIMATION - FIXED */
 @keyframes sealSpinSmooth {
   0% { 
     transform: translateX(-50%) rotate(0deg) scale(1); 
@@ -424,112 +313,11 @@ body {
     transform: translateX(-50%) rotate(360deg) scale(1); 
   }
 }
-
-/* ========================================
-   ✅ SAAT FLAP BUKA - WAX FADE OUT
-======================================== */
-/* ✅ SAAT FLAP BUKA - FADE OUT */
 .env-flap.flap-open::after {
   animation: none;
   opacity: 0;
   transform: translateX(-50%) rotate(360deg) scale(0.3);
 }
-@keyframes sealSpin {
-  from { transform: translateX(-50%) rotate(0deg); }
-  to { transform: translateX(-50%) rotate(360deg); }
-}
-/* ========================================
-   📱 RESPONSIVE - ADJUSTED
-======================================== */
-/* ========================================
-   📱 RESPONSIVE - ENVELOPE & SEAL
-======================================== */
-@media (max-width: 768px) {
-  .envelope-container {
-    width: 300px;
-    height: 230px;
-  }
-  .env-flap {
-    top: -115px;
-    border-left: 150px solid transparent;
-    border-right: 150px solid transparent;
-    border-bottom: 115px solid var(--mocha-light);
-  }
-  .env-flap::after {
-    bottom: -22px;        /* ✅ UBAH dari top: 80px */
-    width: 44px;
-    height: 44px;
-    font-size: 24px;
-  }
-  .env-card {
-    padding: 18px 16px;
-    max-height: 180px;
-  }
-  .card-icon {
-    font-size: 28px;
-  }
-  .card-title {
-    font-size: 20px;
-  }
-  .card-name {
-    font-size: 18px;
-  }
-  .card-time {
-    font-size: 11px;
-  }
-  .btn-open-envelope {
-    padding: 14px 32px;
-    font-size: 16px;
-  }
-}
-@media (max-width: 480px) {
-  .envelope-container {
-    width: 280px;
-    height: 210px;
-  }
-  .env-flap {
-    top: -105px;
-    border-left: 140px solid transparent;
-    border-right: 140px solid transparent;
-    border-bottom: 105px solid var(--mocha-light);
-  }
-  .env-flap::after {
-    bottom: -20px;        /* ✅ UBAH dari top: 75px */
-    width: 40px;
-    height: 40px;
-    font-size: 22px;
-  }
-  .env-card {
-    padding: 16px 14px;
-    max-height: 160px;
-  }
-  .card-icon {
-    font-size: 26px;
-  }
-  .card-title {
-    font-size: 18px;
-  }
-  .card-name {
-    font-size: 16px;
-  }
-  .card-time {
-    font-size: 10px;
-  }
-  .btn-open-envelope {
-    padding: 12px 28px;
-    font-size: 15px;
-  }
-}
-/* ========================================
-   ✨ ADDITIONAL ANIMATIONS
-======================================== */
-@keyframes envelopeShake {
-  0%, 100% { transform: translateX(0) rotate(0deg); }
-  25% { transform: translateX(-10px) rotate(-2deg); }
-  50% { transform: translateX(10px) rotate(2deg); }
-  75% { transform: translateX(-10px) rotate(-2deg); }
-}
-/* Confetti Effect on Open */
 .confetti {
   position: fixed;
   width: 10px;
@@ -550,70 +338,185 @@ body {
   }
 }
 /* ========================================
-   📱 SIDEBAR NAVIGATION
+   🔘 OPEN ENVELOPE BUTTON
+======================================== */
+.btn-open-envelope {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 48px;
+  background: linear-gradient(135deg, #FFB6C1 0%, #FF8FA3 50%, #8B6F47 100%);
+  background-size: 200% 200%;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 
+    0 10px 30px rgba(255, 143, 163, 0.4),
+    0 5px 15px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  animation: btnGlow 3s ease-in-out infinite;
+}
+@keyframes btnGlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+.btn-open-envelope::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-open-envelope:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 
+    0 15px 40px rgba(255, 143, 163, 0.5),
+    0 8px 25px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 0 0 4px rgba(255, 182, 193, 0.3);
+}
+.btn-open-envelope:hover::before {
+  left: 100%;
+}
+.btn-open-envelope:active {
+  transform: translateY(-2px) scale(1.02);
+  transition: all 0.1s ease;
+}
+.btn-text {
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+.btn-icon {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  animation: iconWiggle 2s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
+}
+@keyframes iconWiggle {
+  0%, 100% { 
+    transform: rotate(0deg) translateY(0); 
+  }
+  25% { 
+    transform: rotate(-10deg) translateY(-3px); 
+  }
+  50% { 
+    transform: rotate(0deg) translateY(0); 
+  }
+  75% { 
+    transform: rotate(10deg) translateY(-3px); 
+  }
+}
+
+/* ========================================
+   📱 SIDEBAR NAVIGATION - ROSE GOLD
 ======================================== */
 #sidebarNav {
   position: fixed;
   top: 50%;
   right: 20px;
-  transform: translateY(-50%) translateX(0); /* ✅ Default: visible */
+  transform: translateY(-50%) translateX(0);
   z-index: 9999;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   opacity: 0;
   pointer-events: none;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-/* ✅ SHOW STATE (after envelope opens) */
 #sidebarNav.show {
   opacity: 1;
   pointer-events: auto;
 }
-/* ✅ HIDDEN STATE (saat di-toggle) */
 #sidebarNav.sidebar-hidden {
-  transform: translateY(-50%) translateX(calc(100% + 40px)); /* ✅ Slide ke kanan */
+  transform: translateY(-50%) translateX(calc(100% + 40px));
   opacity: 0;
   pointer-events: none;
 }
 .sidebar-item {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  padding: 12px 16px;
+  padding: 10px 14px;
   border-radius: 12px;
   display: flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  transition: var(--transition);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   user-select: none;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text);
-  border: 2px solid var(--pink-soft);
+  border: 2px solid #E8C3B9; /* ✅ Rose Gold border */
   box-shadow: var(--shadow-sm);
   white-space: nowrap;
-  min-width: 140px;
+  min-width: 130px;
+  position: relative;
+  overflow: hidden;
+}
+.sidebar-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(232, 195, 185, 0.4), transparent); /* ✅ Rose Gold shimmer */
+  transition: left 0.5s;
+}
+.sidebar-item:hover::before {
+  left: 100%;
 }
 .sidebar-item:hover {
-  transform: translateX(-8px) scale(1.05);
-  background: var(--pink-soft);
-  border-color: var(--pink-medium);
+  transform: translateX(-10px) scale(1.05);
   box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, rgba(232, 195, 185, 0.2), rgba(255, 255, 255, 0.95)); /* ✅ Rose Gold hover */
+  border-color: #D4A5A5; /* ✅ Rose Gold darker */
 }
 .sidebar-item.active {
-  background: linear-gradient(135deg, var(--mocha-medium), var(--pink-accent));
+  background: linear-gradient(135deg, #D4A5A5, #B08972); /* ✅ Rose Gold gradient */
   color: white;
-  border-color: var(--mocha-dark);
-  transform: translateX(-10px) scale(1.08);
+  border-color: #9A6F5E; /* ✅ Rose Gold dark border */
+  transform: translateX(-12px) scale(1.08);
+  box-shadow: 
+    0 8px 20px rgba(180, 137, 114, 0.4), /* ✅ Rose Gold shadow */
+    0 0 0 3px rgba(232, 195, 185, 0.3); /* ✅ Rose Gold outer glow */
+  font-weight: 700;
 }
 .sidebar-item i {
   font-size: 18px;
+  transition: transform 0.3s;
+  color: #D4A5A5; /* ✅ Rose Gold icon */
+}
+.sidebar-item.active i {
+  color: white; /* ✅ White when active */
+}
+.sidebar-item:hover i {
+  transform: scale(1.2);
+}
+.sidebar-item span {
+  font-size: 13px;
+  letter-spacing: 0.3px;
 }
 /* ========================================
-   🎯 FLOATING TOGGLE BUTTON
-======================================== */
-/* ========================================
-   🎯 FLOATING TOGGLE BUTTON - DYNAMIC POSITION
+   🎯 SIDEBAR TOGGLE BUTTON - ROSE GOLD
 ======================================== */
 .sidebar-toggle-btn {
   position: fixed;
@@ -622,7 +525,7 @@ body {
   transform: translateY(-50%);
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, var(--pink-accent), var(--rose));
+  background: linear-gradient(135deg, #D4A5A5, #B08972); /* ✅ Rose Gold button */
   border-radius: 50%;
   border: 3px solid white;
   display: flex;
@@ -633,52 +536,47 @@ body {
   font-size: 20px;
   color: white;
   box-shadow: 
-    0 6px 20px rgba(255, 112, 150, 0.4),
-    0 0 0 4px rgba(255, 228, 225, 0.3);
+    0 6px 20px rgba(180, 137, 114, 0.4), /* ✅ Rose Gold shadow */
+    0 0 0 4px rgba(232, 195, 185, 0.3); /* ✅ Rose Gold outer glow */
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
   pointer-events: none;
 }
-/* ✅ SHOW STATE */
 .sidebar-toggle-btn.show {
   opacity: 1;
   pointer-events: auto;
 }
-/* ✅ SAAT SIDEBAR MUNCUL: Button geser ke kiri (ga ngalangin) */
 .sidebar-toggle-btn.sidebar-visible {
-  right: 180px; /* ✅ GESER KE KIRI (sesuaikan dengan lebar sidebar) */
+  right: 180px;
 }
-/* ✅ SAAT SIDEBAR HIDDEN: Button balik ke kanan */
 .sidebar-toggle-btn.sidebar-closed {
   right: 20px;
 }
 .sidebar-toggle-btn:hover {
   transform: translateY(-50%) scale(1.1);
   box-shadow: 
-    0 8px 25px rgba(255, 112, 150, 0.5),
-    0 0 0 6px rgba(255, 228, 225, 0.4);
+    0 8px 25px rgba(180, 137, 114, 0.5), /* ✅ Rose Gold hover shadow */
+    0 0 0 6px rgba(232, 195, 185, 0.4); /* ✅ Rose Gold hover glow */
 }
 .sidebar-toggle-btn:active {
   transform: translateY(-50%) scale(0.95);
 }
-/* ✅ ICON ROTATION */
 .sidebar-toggle-btn.sidebar-closed i {
   transform: rotate(180deg);
 }
 .sidebar-toggle-btn i {
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-/* ✅ PULSE ANIMATION */
 @keyframes togglePulse {
   0%, 100% { 
     box-shadow: 
-      0 6px 20px rgba(255, 112, 150, 0.4),
-      0 0 0 4px rgba(255, 228, 225, 0.3);
+      0 6px 20px rgba(180, 137, 114, 0.4),
+      0 0 0 4px rgba(232, 195, 185, 0.3);
   }
   50% { 
     box-shadow: 
-      0 8px 25px rgba(255, 112, 150, 0.5),
-      0 0 0 8px rgba(255, 228, 225, 0.5);
+      0 8px 25px rgba(180, 137, 114, 0.5),
+      0 0 0 8px rgba(232, 195, 185, 0.5);
   }
 }
 .sidebar-toggle-btn.show {
@@ -686,101 +584,6 @@ body {
 }
 .sidebar-toggle-btn:hover {
   animation: none;
-}
-/* ========================================
-   📱 RESPONSIVE - MOBILE VERSION
-======================================== */
-@media (max-width: 768px) {
-  /* Sidebar horizontal di bawah */
-  #sidebarNav {
-    flex-direction: row;
-    bottom: 80px; /* ✅ NAIKIN dikit biar ga ketutup button */
-    top: auto;
-    right: 50%;
-    transform: translateX(50%) translateY(0);
-    background: rgba(255, 255, 255, 0.95);
-    padding: 10px 16px;
-    border-radius: 20px;
-    gap: 8px;
-    backdrop-filter: blur(10px);
-    border: 2px solid var(--pink-soft);
-    box-shadow: var(--shadow-lg);
-    max-width: 90vw; /* ✅ Batasi lebar */
-    overflow-x: auto;
-  }
-  #sidebarNav.sidebar-hidden {
-    transform: translateX(50%) translateY(calc(100% + 100px)); /* ✅ Slide down lebih jauh */
-  }
-  .sidebar-item {
-    flex-direction: column;
-    padding: 8px 12px;
-    font-size: 10px;
-    min-width: auto;
-    gap: 4px;
-  }
-  .sidebar-item i {
-    font-size: 16px;
-  }
-  .sidebar-item span {
-    font-size: 9px;
-  }
-  .sidebar-item:hover {
-    transform: translateY(-5px) scale(1.05);
-  }
-  .sidebar-item.active {
-    transform: translateY(-8px) scale(1.08);
-  }
-  /* ✅ TOGGLE BUTTON: DI TENGAH BAWAH */
-  .sidebar-toggle-btn {
-    top: auto;
-    bottom: 15px; /* ✅ DI BAWAH */
-    right: 50%; /* ✅ CENTER */
-    left: auto;
-    transform: translateX(50%); /* ✅ CENTER HORIZONTAL */
-    width: 50px;
-    height: 50px;
-    font-size: 22px;
-  }
-  /* ✅ OVERRIDE: Ga ada geser kiri/kanan di mobile */
-  .sidebar-toggle-btn.sidebar-visible {
-    right: 50%;
-    transform: translateX(50%);
-  }
-  .sidebar-toggle-btn.sidebar-closed {
-    right: 50%;
-    transform: translateX(50%);
-  }
-  .sidebar-toggle-btn:hover {
-    transform: translateX(50%) scale(1.1);
-  }
-  .sidebar-toggle-btn:active {
-    transform: translateX(50%) scale(0.95);
-  }
-  /* ✅ ICON: Chevron up/down di mobile */
-  .sidebar-toggle-btn i {
-    transform: rotate(-90deg); /* ✅ Default: chevron up */
-  }
-  .sidebar-toggle-btn.sidebar-closed i {
-    transform: rotate(90deg); /* ✅ Jadi chevron down */
-  }
-}
-@media (max-width: 480px) {
-  #sidebarNav {
-    padding: 8px 12px;
-    gap: 6px;
-    bottom: 75px; /* ✅ Adjust */
-    max-width: 95vw;
-  }
-  .sidebar-item {
-    padding: 6px 10px;
-    min-width: 60px;
-  }
-  .sidebar-toggle-btn {
-    width: 46px;
-    height: 46px;
-    font-size: 20px;
-    bottom: 12px;
-  }
 }
 /* ========================================
    🎵 MUSIC PLAYER
@@ -805,6 +608,11 @@ body {
   transition: var(--transition);
   z-index: 9999;
   border: 3px solid white;
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  pointer-events: auto;
+  touch-action: auto;
 }
 .music-floating:hover {
   transform: scale(1.15) rotate(15deg);
@@ -824,15 +632,26 @@ body {
   }
 }
 /* ========================================
-   📄 SCROLL SNAP CONTAINER
+   📄 MAIN CONTAINER
 ======================================== */
-/* #mainContainer {
-  scroll-snap-type: y mandatory;
+#mainContainer {
   overflow-y: auto;
+  overflow-x: hidden;
   height: 100vh;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  transform: translateZ(0);
+  will-change: scroll-position;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  position: relative;
 }
+/* ========================================
+   📄 SECTIONS
+======================================== */
 .snap-section {
-  scroll-snap-align: center;
   padding: 80px 20px;
   min-height: 100vh;
   display: flex;
@@ -840,91 +659,42 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow-x: hidden;
+  max-width: 100vw;
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
 }
 .snap-section:nth-child(even) {
   background: linear-gradient(135deg, var(--beige), var(--pink-soft));
 }
 .snap-section:nth-child(odd) {
   background: linear-gradient(135deg, var(--cream), var(--latte));
-} */
-/* ========================================
-   📄 SCROLL SNAP CONTAINER - MODIFIED
-======================================== */
-/* ========================================
-   📄 MAIN CONTAINER - PURE SMOOTH SCROLL
-======================================== */
-#mainContainer {
-  /* ❌ HAPUS SEMUA INI */
-  /* scroll-snap-type: y proximity; */
-  /* scroll-snap-stop: normal; */
-  /* ✅ KEEP ONLY THESE */
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: 100vh;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  position: relative;
 }
-.snap-section {
-  scroll-snap-align: start; /* ✅ UBAH dari center */
-  scroll-snap-stop: normal; /* ✅ TAMBAHKAN INI */
-  padding: 80px 20px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow-x: hidden;       /* ✅ TAMBAHKAN INI */
-  max-width: 100vw;         /* ✅ TAMBAHKAN INI */
-}
-/* ========================================
-   📏 SECTION HEIGHT CONTROL
-======================================== */
-/* ✅ Hero & Waktu MUST be full screen */
 #sectionHero,
-#sectionWaktu {
-  min-height: 100vh;
-  height: auto; /* Allow to grow if content exceed */
-}
-/* ✅ Lokasi bisa lebih panjang */
-#sectionLokasi {
-  min-height: 100vh;
-  height: auto;
-}
-/* ✅ Gallery, Video, Gift bisa lebih pendek */
-#sectionGallery,
-#sectionVideo,
-#sectionGift {
-  min-height: 100vh; /* ✅ Tetap full screen */
-  padding: 60px 20px;
-}
-/* ✅ Komentar bisa panjang */
+#sectionWaktu,
+#sectionLokasi,
 #sectionKomentar {
   min-height: 100vh;
   height: auto;
-  padding: 80px 20px;
 }
-
+#sectionGallery,
+#sectionVideo,
+#sectionGift {
+  min-height: 100vh;
+  padding: 60px 20px;
+}
 /* ========================================
-   ✨ FADE IN ANIMATIONS - OPTIMIZED
+   ✨ FADE ANIMATIONS
 ======================================== */
 .fade-section {
   opacity: 0;
-  transform: translateY(20px); /* ✅ Reduce dari 30px */
-  transition: opacity 0.4s ease, transform 0.4s ease; /* ✅ Lebih cepat */
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .fade-section.visible {
   opacity: 1;
   transform: translateY(0);
-}
-/* ✅ DISABLE HEAVY ANIMATIONS di Mobile */
-@media (max-width: 768px) {
-  .fade-section {
-    opacity: 1; /* Skip fade animation */
-    transform: none;
-    transition: none;
-  }
 }
 /* ========================================
    🌸 FLOATING FLOWERS
@@ -938,6 +708,7 @@ body {
   z-index: 9998;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
+
 /* ========================================
    📝 TYPOGRAPHY
 ======================================== */
@@ -967,7 +738,7 @@ body {
   font-size: clamp(2.5rem, 6vw, 4rem);
   color: var(--mocha-dark);
   text-align: center;
-    margin-top: -1rem;
+  margin-top: -1rem;
   margin-bottom: -1rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
 }
@@ -993,6 +764,51 @@ body {
   25% { transform: scale(1.1); }
   50% { transform: scale(1); }
 }
+.section-subtitle {
+  font-size: 16px;
+  color: var(--text-light);
+  text-align: center;
+  margin-top: -20px;
+  margin-bottom: 50px;
+  font-weight: 400;
+  font-style: italic;
+}
+.bodytext {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text);
+  max-width: 650px;
+  margin: 0 auto;
+}
+.bodytext b {
+  color: var(--mocha-dark);
+  font-size: 18px;
+  display: block;
+  margin: 12px 0 8px 0;
+  font-family: 'Playfair Display', serif;
+}
+.highlight-name {
+  display: block;
+  font-size: 22px;
+  color: var(--pink-accent);
+  font-family: 'Playfair Display', serif;
+  margin: 16px 0 12px;
+  font-weight: 700;
+}
+/* ========================================
+   🖼️ BISMILLAH IMAGE
+======================================== */
+.bismillah,
+.bismillah2 {
+  display: block;
+  margin: 0 auto 20px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  animation: fadeIn 1s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 /* ========================================
    🎴 CARDS
 ======================================== */
@@ -1008,9 +824,9 @@ body {
   transition: var(--transition);
   position: relative;
   overflow: hidden;
-  word-wrap: break-word;      /* ✅ TAMBAHKAN INI */
-  overflow-wrap: break-word;  /* ✅ TAMBAHKAN INI */
-  hyphens: auto;              /* ✅ TAMBAHKAN INI */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 .card-soft::before {
   content: '';
@@ -1020,7 +836,6 @@ body {
   right: 0;
   height: 4px;
   background: linear-gradient(90deg, var(--pink-accent), var(--mocha-medium));
-  /* background: black; */
 }
 .card-soft:hover {
   transform: translateY(-5px);
@@ -1037,9 +852,9 @@ body {
   max-width: 600px;
   margin: 20px auto;
   border: 2px solid var(--pink-soft);
-  word-wrap: break-word;      /* ✅ TAMBAHKAN INI */
-  overflow-wrap: break-word;  /* ✅ TAMBAHKAN INI */
-  hyphens: auto;              /* ✅ TAMBAHKAN INI */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 /* ========================================
    🎯 BUTTONS
@@ -1081,35 +896,125 @@ body {
   transform: translateY(-1px);
 }
 /* ========================================
-   ⏰📍 WAKTU & LOKASI - ELEGANT
+   ⏰ COUNTDOWN
+======================================== */
+.event-countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 2px solid var(--pink-soft);
+}
+.countdown-item {
+  background: linear-gradient(135deg, var(--cream), var(--pink-soft));
+  border: 2px solid var(--pink-medium);
+  border-radius: 12px;
+  padding: 10px 6px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+.countdown-number {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--mocha-dark), var(--pink-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.countdown-label {
+  font-size: 10px;
+  color: var(--mocha-medium);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+/* ========================================
+   🎯 UTILITY CLASSES
+======================================== */
+.mt-10 { margin-top: 10px; }
+.mt-20 { margin-top: 20px; }
+.mt-30 { margin-top: 30px; }
+.mt-40 { margin-top: 40px; }
+.mb-10 { margin-bottom: 10px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-30 { margin-bottom: 30px; }
+.mb-40 { margin-bottom: 40px; }
+.text-center { text-align: center; }
+/* ========================================
+   ✨ ANIMATIONS
+======================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 
+      0 0 5px var(--pink-soft),
+      0 0 10px var(--pink-soft),
+      0 0 15px var(--pink-medium);
+  }
+  50% {
+    box-shadow: 
+      0 0 10px var(--pink-medium),
+      0 0 20px var(--pink-medium),
+      0 0 30px var(--pink-accent);
+  }
+}
+.glow {
+  animation: glow 2s ease-in-out infinite;
+}
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    var(--mocha-dark) 0%,
+    var(--pink-accent) 50%,
+    var(--mocha-dark) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ========================================
+   ⏰📍 SECTION LOKASI
 ======================================== */
 #sectionLokasi {
   padding: 80px 20px;
   background: linear-gradient(135deg, var(--beige) 0%, var(--pink-soft) 100%);
 }
-.section-subtitle {
-  font-size: 16px;
-  color: var(--text-light);
-  text-align: center;
-  margin-top: -20px;
-  margin-bottom: 50px;
-  font-weight: 400;
-  font-style: italic;
-}
-/* ========================================
-   📦 EVENT CONTAINER - COMPACT
-======================================== */
 .event-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
-  max-height: 500px; /* ✅ Fixed height */
+  max-height: 500px;
   margin: 0 auto 50px;
-  align-items: stretch; /* ✅ Cards same height */
+  align-items: stretch;
 }
-/* ========================================
-   🎴 EVENT CARD - COMPACT
-======================================== */
 .event-card {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
@@ -1123,9 +1028,9 @@ body {
   max-height: 600px;
   display: flex;
   flex-direction: column;
-  word-wrap: break-word;      /* ✅ TAMBAHKAN INI */
-  overflow-wrap: break-word;  /* ✅ TAMBAHKAN INI */
-  hyphens: auto;              /* ✅ TAMBAHKAN INI */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 .event-card::before {
   content: '';
@@ -1136,38 +1041,31 @@ body {
   height: 3px;
   background: linear-gradient(90deg, var(--pink-accent), var(--mocha-medium));
 }
-/* ========================================
-   🎯 EVENT ICON - COMPACT
-======================================== */
 .event-icon-wrapper {
   text-align: center;
-  margin-bottom: 16px; /* ✅ Margin dikurangi */
+  margin-bottom: 16px;
 }
 .event-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 60px; /* ✅ Lebih kecil */
+  width: 60px;
   height: 60px;
   background: linear-gradient(135deg, var(--pink-accent), var(--rose));
   border-radius: 50%;
-  font-size: 28px; /* ✅ Icon lebih kecil */
+  font-size: 28px;
   color: white;
   box-shadow: 
     0 6px 16px rgba(255, 112, 150, 0.3),
     0 0 0 6px rgba(255, 228, 225, 0.3);
 }
-/* ========================================
-   📝 EVENT CONTENT - COMPACT
-======================================== */
 .event-content {
   text-align: center;
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow-y: auto; /* ✅ Allow scroll jika perlu */
+  overflow-y: auto;
 }
-/* Custom scrollbar */
 .event-content::-webkit-scrollbar {
   width: 4px;
 }
@@ -1176,8 +1074,8 @@ body {
   border-radius: 10px;
 }
 .event-title {
-  font-family: var(--font-display);
-  font-size: 22px; /* ✅ Lebih kecil */
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
   color: var(--mocha-dark);
   margin: 0 0 12px 0;
   font-weight: 700;
@@ -1186,7 +1084,7 @@ body {
   width: 60px;
   height: 2px;
   background: var(--pink-medium);
-  margin: 0 auto 16px; /* ✅ Margin dikurangi */
+  margin: 0 auto 16px;
   border-radius: 10px;
   position: relative;
 }
@@ -1201,101 +1099,53 @@ body {
   background: white;
   padding: 0 6px;
 }
-/* ========================================
-   📅 EVENT DETAIL - COMPACT
-======================================== */
 .event-detail {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 14px; /* ✅ Padding dikurangi */
-  margin-bottom: 6px; /* ✅ Margin dikurangi */
+  padding: 8px 14px;
+  margin-bottom: 6px;
   background: linear-gradient(135deg, var(--pink-soft), white);
   border-radius: 10px;
   border: 1px solid var(--pink-soft);
   transition: var(--transition);
 }
 .detail-label {
-  font-size: 13px; /* ✅ Lebih kecil */
+  font-size: 13px;
   color: var(--text-light);
   font-weight: 500;
 }
 .detail-value {
-  font-size: 14px; /* ✅ Lebih kecil */
+  font-size: 14px;
   color: var(--mocha-dark);
   font-weight: 600;
 }
-/* ========================================
-   ⏰ COUNTDOWN - COMPACT
-======================================== */
-.event-countdown {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px; /* ✅ Gap dikurangi */
-  margin-top: 16px; /* ✅ Margin dikurangi */
-  padding-top: 16px;
-  border-top: 2px solid var(--pink-soft);
-}
-.countdown-item {
-  background: linear-gradient(135deg, var(--cream), var(--pink-soft));
-  border: 2px solid var(--pink-medium);
-  border-radius: 12px;
-  padding: 10px 6px; /* ✅ Padding dikurangi */
-  text-align: center;
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition);
-}
-.countdown-number {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 24px; /* ✅ Lebih kecil */
-  font-weight: 800;
-  background: linear-gradient(135deg, var(--mocha-dark), var(--pink-accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.countdown-label {
-  font-size: 10px; /* ✅ Lebih kecil */
-  color: var(--mocha-medium);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-}
-/* ========================================
-   📍 LOCATION ADDRESS - COMPACT
-======================================== */
 .location-address {
   background: linear-gradient(135deg, var(--pink-soft), white);
   border: 2px solid var(--pink-soft);
   border-radius: 12px;
-  padding: 14px; /* ✅ Padding dikurangi */
-  margin-bottom: 12px; /* ✅ Margin dikurangi */
+  padding: 14px;
+  margin-bottom: 12px;
   transition: var(--transition);
 }
 .location-address p {
-  font-size: 13px; /* ✅ Lebih kecil */
-  line-height: 1.6; /* ✅ Line height dikurangi */
+  font-size: 13px;
+  line-height: 1.6;
   color: var(--text);
   margin: 0;
 }
 .location-address strong {
-  font-size: 15px; /* ✅ Lebih kecil */
+  font-size: 15px;
   color: var(--mocha-dark);
   font-weight: 700;
   display: block;
   margin-bottom: 6px;
 }
-/* ========================================
-   🗺️ MAP PREVIEW - COMPACT
-======================================== */
 .map-preview {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px; /* ✅ Gap dikurangi */
-  margin: 12px 0; /* ✅ Margin dikurangi */
+  gap: 10px;
+  margin: 12px 0;
 }
 .map-frame {
   width: 100%;
@@ -1304,27 +1154,24 @@ body {
   border-radius: 10px;
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
-  max-width: 100%;  /* ✅ TAMBAHKAN INI (sebenarnya sudah 100%) */
-  display: block;   /* ✅ TAMBAHKAN INI */
+  max-width: 100%;
+  display: block;
 }
 .map-frame:hover {
   transform: scale(1.02);
   box-shadow: var(--shadow-md);
   border-color: var(--pink-medium);
 }
-/* ========================================
-   🔗 BUTTON LOCATION - COMPACT
-======================================== */
 .btn-location {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px; /* ✅ Padding dikurangi */
+  padding: 10px 20px;
   background: linear-gradient(135deg, var(--mocha-medium), var(--pink-accent));
   color: white;
   border: none;
   border-radius: 25px;
-  font-size: 13px; /* ✅ Lebih kecil */
+  font-size: 13px;
   font-weight: 600;
   text-decoration: none;
   transition: var(--transition);
@@ -1338,64 +1185,276 @@ body {
 .btn-location i {
   font-size: 14px;
 }
+
 /* ========================================
-   📱 RESPONSIVE
+   ⏰ SECTION WAKTU & MEMPELAI
 ======================================== */
-@media (max-width: 992px) {
-  .event-container {
-    grid-template-columns: 1fr;
-    max-height: none; /* ✅ Remove height limit di mobile */
-    gap: 20px;
-  }
-  .event-card {
-    max-height: none;
-  }
+#sectionWaktu {
+  padding: 40px 20px;
+  background: linear-gradient(135deg, var(--cream) 0%, var(--pink-soft) 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: auto;
 }
-@media (max-width: 768px) {
-  .event-card {
-    padding: 20px 18px;
-  }
-  .event-icon {
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-  }
-  .event-title {
-    font-size: 20px;
-  }
-  .map-frame {
-    height: 120px;
-  }
+.waktu-intro {
+  max-width: 700px;
+  margin: 0 auto 30px;
+  text-align: center;
 }
-@media (max-width: 600px) {
-  .map-preview {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  .map-frame {
-    height: 160px;
-  }
+.section-divider {
+  text-align: center;
+  margin: 30px auto;
+  position: relative;
+  max-width: 600px;
+}
+.section-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--pink-medium) 20%,
+    var(--pink-medium) 80%,
+    transparent
+  );
+}
+.section-divider span {
+  display: inline-block;
+  background: var(--cream);
+  padding: 0 20px;
+  font-size: 28px;
+  position: relative;
+  z-index: 1;
+  animation: heartBeat 1.5s infinite;
 }
 /* ========================================
-   ✨ ANIMATIONS
+   👰🤵 MEMPELAI CONTAINER
 ======================================== */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+.mempelai-container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 24px;
+  max-width: 1100px;
+  margin: 30px auto;
+  align-items: center;
+}
+.mempelai-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 20px 18px;
+  box-shadow: var(--shadow-md);
+  border: 2px solid var(--pink-soft);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+.mempelai-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--pink-accent), var(--mocha-medium));
+}
+.mempelai-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--pink-medium);
+}
+.mempelai-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+.mempelai-icon {
+  font-size: 36px;
+  display: block;
+  margin-bottom: 8px;
+  animation: iconFloat 3s ease-in-out infinite;
+}
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.mempelai-label {
+  font-family: 'Great Vibes', cursive;
+  font-size: 20px;
+  color: var(--mocha-dark);
+  font-weight: 400;
+  margin: 0;
+}
+.mempelai-content {
+  text-align: center;
+}
+.mempelai-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--mocha-dark);
+  margin: 0 0 6px 0;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.mempelai-title {
+  font-size: 14px;
+  color: var(--pink-accent);
+  font-weight: 500;
+  margin: 0 0 14px 0;
+}
+.mempelai-divider {
+  width: 50px;
+  height: 2px;
+  background: var(--pink-medium);
+  margin: 14px auto;
+  position: relative;
+}
+.mempelai-divider::before {
+  content: '♥';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--pink-accent);
+  font-size: 16px;
+}
+.mempelai-desc {
+  font-size: 12px;
+  color: var(--text-light);
+  margin: 12px 0 6px 0;
+  font-style: italic;
+}
+.mempelai-parents {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0 0 16px 0;
+}
+.mempelai-parents strong {
+  color: var(--mocha-dark);
+  font-weight: 600;
+}
+.mempelai-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: linear-gradient(135deg, var(--pink-soft), white);
+  border: 2px solid var(--pink-medium);
+  border-radius: 25px;
+  color: var(--mocha-dark);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+.mempelai-social:hover {
+  background: linear-gradient(135deg, var(--pink-medium), var(--pink-soft));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--pink-accent);
+}
+.mempelai-social i {
+  font-size: 16px;
+  color: var(--pink-accent);
+}
+/* ========================================
+   📸 FOTO TENGAH
+======================================== */
+.mempelai-photo-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.mempelai-photo-frame {
+  width: 200px;
+  height: 250px;
+  position: relative;
+  border-radius: 150px 150px 30px 30px;
+  overflow: hidden;
+  box-shadow: 
+    0 0 0 6px rgba(255, 255, 255, 0.5),
+    0 0 0 10px var(--pink-soft),
+    var(--shadow-lg);
+  transition: var(--transition);
+}
+.mempelai-photo-frame:hover {
+  transform: scale(1.05) rotate(3deg);
+  box-shadow: 
+    0 0 0 6px rgba(255, 255, 255, 0.7),
+    0 0 0 10px var(--pink-medium),
+    0 15px 40px rgba(111, 78, 55, 0.25);
+}
+.mempelai-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+  max-width: 100%;
+  display: block;
+}
+.mempelai-photo-frame:hover .mempelai-photo {
+  transform: scale(1.08);
+}
+.photo-overlay {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 4px 12px rgba(111, 78, 55, 0.2),
+    0 0 0 3px var(--pink-soft);
+  border: 2px solid white;
+}
+.photo-ampersand {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: var(--pink-accent);
+  font-weight: 700;
+  animation: ampersandSpin 4s ease-in-out infinite;
+}
+@keyframes ampersandSpin {
+  0%, 100% { 
+    transform: rotate(-5deg) scale(1); 
   }
-  to {
+  50% { 
+    transform: rotate(5deg) scale(1.1); 
+  }
+}
+.photo-decoration {
+  font-size: 32px;
+  animation: decorationPulse 2s ease-in-out infinite;
+}
+@keyframes decorationPulse {
+  0%, 100% { 
+    transform: scale(1); 
+    opacity: 0.8;
+  }
+  50% { 
+    transform: scale(1.2); 
     opacity: 1;
-    transform: translateY(0);
   }
 }
-/* Stagger animation untuk cards */
-.event-time {
-  animation-delay: 0.1s;
-}
-.event-location {
-  animation-delay: 0.2s;
-}
+
 /* ========================================
    🖼️ GALLERY MASONRY
 ======================================== */
@@ -1429,14 +1488,15 @@ body {
   column-gap: 16px;
   padding-bottom: 20px;
 }
-.masonry-item img {
-  width: 100%;
-  display: block;
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 1s ease, transform 1s ease;
-  max-width: 100%; /* ✅ TAMBAHKAN INI */
-  height: auto;    /* ✅ TAMBAHKAN INI */
+.masonry-item {
+  break-inside: avoid-column;
+  margin-bottom: 16px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  transition: var(--transition);
+  border: 3px solid var(--pink-soft);
 }
 .masonry-item:hover {
   transform: scale(1.03);
@@ -1449,6 +1509,8 @@ body {
   opacity: 0;
   transform: scale(0.9);
   transition: opacity 1s ease, transform 1s ease;
+  max-width: 100%;
+  height: auto;
 }
 .masonry-item img.loaded {
   opacity: 1;
@@ -1463,19 +1525,6 @@ body {
 }
 .gallery-fade.fade-in {
   opacity: 1;
-}
-@media (max-width: 900px) {
-  .masonry-grid {
-    column-count: 2;
-  }
-}
-@media (max-width: 600px) {
-  .masonry-grid {
-    column-count: 1;
-  }
-  .gallery-scroll {
-    height: 50vh;
-  }
 }
 /* ========================================
    🎁 GIFT CAROUSEL
@@ -1542,230 +1591,33 @@ body {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-/* ========================================
-   💬 CHAT SECTION
-======================================== */
-.chat-container {
-  display: grid;
-  grid-template-columns: 0.4fr 0.6fr;
-  gap: 30px;
-  width: 100%;
-  max-width: 1000px;
-  margin: 30px auto;
-  align-items: flex-start;
-}
-.chat-form {
-  padding: 32px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  box-shadow: var(--shadow-lg);
-  border: 2px solid var(--pink-soft);
-}
-.chat-label {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: var(--mocha-dark);
-  display: block;
-}
-.chat-input,
-.chat-textarea {
-  width: 100%;
-  padding: 14px 18px;
-  border-radius: 12px;
-  border: 2px solid var(--pink-soft);
-  background: white;
-  margin-bottom: 16px;
-  font-size: 15px;
-  font-family: 'Poppins', sans-serif;
-  color: var(--text);
-  transition: var(--transition);
-}
-.chat-input:focus,
-.chat-textarea:focus {
-  outline: none;
-  border-color: var(--pink-accent);
-  background: var(--pink-soft);
-  box-shadow: 0 0 0 4px rgba(255, 182, 193, 0.2);
-}
-.chat-textarea {
-  height: 120px;
-  resize: vertical;
-  min-height: 80px;
-}
-.chat-status {
-  margin-top: 12px;
-  text-align: center;
-  font-size: 14px;
-  color: var(--text-light);
-}
-.chat-live {
-  padding: 0;
-}
-.chat-wrapper {
-  height: 400px;
-  padding: 20px;
-  overflow-y: auto;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  border: 2px solid var(--pink-soft);
-  box-shadow: var(--shadow-md);
-}
-.chat-wrapper::-webkit-scrollbar {
-  width: 8px;
-}
-.chat-wrapper::-webkit-scrollbar-track {
-  background: var(--pink-soft);
-  border-radius: 10px;
-}
-.chat-wrapper::-webkit-scrollbar-thumb {
-  background: var(--pink-medium);
-  border-radius: 10px;
-}
-.chat-stream {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.chat-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  opacity: 0;
-  transform: translateY(15px);
-  animation: chatSlideIn 0.5s ease forwards;
-  max-width: 100%;        /* ✅ TAMBAHKAN INI */
-  overflow: hidden;       /* ✅ TAMBAHKAN INI */
-}
-@keyframes chatSlideIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.chat-avatar {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: var(--pink-soft);
-  box-shadow: 
-    0 0 0 3px white,
-    var(--shadow-sm);
-  flex-shrink: 0;
-  border: 2px solid var(--pink-soft);
-}
-.chat-bubble {
-  flex: 1;
-  background: white;
-  border: 2px solid var(--pink-soft);
-  padding: 14px 18px;
-  border-radius: 16px 16px 16px 4px;
-  box-shadow: var(--shadow-sm);
-  position: relative;
-  transition: var(--transition);
-}
-.chat-bubble::before {
-  content: '';
-  position: absolute;
-  left: -8px;
-  top: 15px;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 10px 10px 0;
-  border-color: transparent var(--pink-soft) transparent transparent;
-}
-.chat-bubble:hover {
-  transform: translateX(5px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--pink-medium);
-}
-.chat-name {
-  font-family: 'Great Vibes', cursive;
-  font-size: 20px;
-  color: var(--mocha-dark);
-  margin-bottom: 4px;
-  line-height: 1;
-}
-.chat-message {
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--text);
-}
+/* Mobile slower speed */
 @media (max-width: 768px) {
-  .chat-container {
-    grid-template-columns: 1fr;
-    gap: 20px;
+  .gift-track {
+    animation: giftRunMobile 60s linear infinite;
   }
-  .chat-wrapper {
-    height: 350px;
+  @keyframes giftRunMobile {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
 }
-/* ========================================
-   ⏰ COUNTDOWN
-======================================== */
-#countdown {
-  display: inline-block;
-  background: linear-gradient(135deg, var(--pink-soft), white);
-  padding: 20px 40px;
-  border-radius: 20px;
-  box-shadow: var(--shadow-lg);
-  border: 3px solid var(--pink-medium);
-  font-family: 'Playfair Display', serif;
-  text-align: center;
-    animation: countPulse 2s infinite;
+@media (max-width: 480px) {
+  .gift-track {
+    animation: giftRunMobile 70s linear infinite;
+    gap: 16px;
+  }
+  .gift-card {
+    min-width: 200px;
+  }
 }
-@keyframes countPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
+/* Pause on hover/touch */
+.gift-track:hover {
+  animation-play-state: paused;
 }
-/* ========================================
-   🖼️ BISMILLAH IMAGE
-======================================== */
-/* ========================================
-   🖼️ BISMILLAH IMAGE
-======================================== */
-.bismillah {
-  display: block;
-  margin: 0 auto 20px;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-  animation: fadeIn 1s ease;
-}
-/* ✅ TAMBAHKAN INI untuk bismillah2 */
-.bismillah2 {
-  display: block;
-  margin: 0 auto 20px; /* ✅ CENTER IT */
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-  animation: fadeIn 1s ease;
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-/* ========================================
-   📝 BODY TEXT STYLES
-======================================== */
-.bodytext {
-  font-size: 15px;
-  line-height: 1.8;
-  color: var(--text);
-  max-width: 650px;
-  margin: 0 auto;
-}
-.bodytext b {
-  color: var(--mocha-dark);
-  font-size: 18px;
-  display: block;
-  margin: 12px 0 8px 0;
-  font-family: 'Playfair Display', serif;
+@media (hover: none) {
+  .gift-scroll:active .gift-track {
+    animation-play-state: paused;
+  }
 }
 /* ========================================
    🎬 VIDEO SECTION
@@ -1774,1316 +1626,13 @@ body {
   border: 3px solid var(--pink-soft);
   box-shadow: var(--shadow-lg);
   transition: var(--transition);
-  max-width: 100%;  /* ✅ TAMBAHKAN INI */
-  display: block;   /* ✅ TAMBAHKAN INI */
+  max-width: 100%;
+  display: block;
 }
 #sectionVideo iframe:hover {
   transform: scale(1.02);
   box-shadow: var(--shadow-xl);
   border-color: var(--pink-medium);
-}
-/* ========================================
-   📄 FOOTER
-======================================== */
-.section {
-  padding: 40px 20px;
-}
-footer, .section:last-child {
-  background: linear-gradient(135deg, var(--mocha-light), var(--pink-soft));
-  border-top: 3px solid var(--pink-medium);
-  padding: 40px 20px;
-  text-align: center;
-}
-footer p {
-  margin: 8px 0;
-  color: var(--text);
-  font-size: 14px;
-}
-footer p:first-child {
-  font-weight: 600;
-  font-size: 16px;
-  color: var(--mocha-dark);
-}
-/* ========================================
-   🎯 UTILITY CLASSES
-======================================== */
-.mt-10 { margin-top: 10px; }
-.mt-20 { margin-top: 20px; }
-.mt-30 { margin-top: 30px; }
-.mt-40 { margin-top: 40px; }
-.mb-10 { margin-bottom: 10px; }
-.mb-20 { margin-bottom: 20px; }
-.mb-30 { margin-bottom: 30px; }
-.mb-40 { margin-bottom: 40px; }
-.text-center { text-align: center; }
-/* ========================================
-   📱 RESPONSIVE DESIGN
-======================================== */
-/* ========================================
-   📱 RESPONSIVE - FULL SCREEN FIX
-======================================== */
-@media (max-width: 768px) {
-  .snap-section {
-    padding: 60px 16px;
-    min-height: 100vh; /* ✅ Force full screen */
-  }
-  #sectionHero {
-    min-height: 100vh;
-    padding: 80px 16px;
-  }
-  #sectionWaktu {
-    padding: 50px 16px;
-    min-height: 100vh;
-  }
-  #sectionLokasi {
-    padding: 60px 16px;
-    min-height: 100vh;
-  }
-  #sectionKomentar {
-    min-height: 100vh;
-    padding: 60px 16px;
-  }
-}
-@media (max-width: 480px) {
-  .snap-section {
-    padding: 50px 14px;
-    min-height: 100vh;
-  }
-  #sectionHero {
-    min-height: 100vh;
-    padding: 60px 14px;
-  }
-  #sectionWaktu {
-    padding: 40px 14px;
-    min-height: 100vh;
-  }
-}
-/* ✅ LANDSCAPE MODE - Allow shorter sections */
-@media (max-height: 600px) and (orientation: landscape) {
-  .snap-section {
-    min-height: auto;
-    padding: 40px 20px;
-  }
-  #sectionHero {
-    min-height: 100vh; /* Hero tetap full */
-  }
-}
-/* ========================================
-   ✨ ANIMATIONS
-======================================== */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-.floating {
-  animation: float 3s ease-in-out infinite;
-}
-/* Glowing effect for special elements */
-.glow {
-  animation: glow 2s ease-in-out infinite;
-}
-@keyframes glow {
-  0%, 100% {
-    box-shadow: 
-      0 0 5px var(--pink-soft),
-      0 0 10px var(--pink-soft),
-      0 0 15px var(--pink-medium);
-  }
-  50% {
-    box-shadow: 
-      0 0 10px var(--pink-medium),
-      0 0 20px var(--pink-medium),
-      0 0 30px var(--pink-accent);
-  }
-}
-/* Shimmer text effect */
-.shimmer-text {
-  background: linear-gradient(
-    90deg,
-    var(--mocha-dark) 0%,
-    var(--pink-accent) 50%,
-    var(--mocha-dark) 100%
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 3s linear infinite;
-}
-@keyframes shimmer {
-  to { background-position: 200% center; }
-}
-/* ========================================
-   🎨 LIGHTBOX ENHANCEMENTS
-======================================== */
-.glightbox-clean .gslide-description {
-  font-size: 16px;
-  color: var(--text);
-  background: rgba(255, 255, 255, 0.95);
-  padding: 16px;
-  border-radius: 12px;
-}
-.glightbox-clean .gclose {
-  color: var(--pink-accent);
-  background: white;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-}
-/* ========================================
-   🎪 SPECIAL EFFECTS
-======================================== */
-.parallax {
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
-}
-/* Smooth transitions for all interactive elements */
-a, button, input, textarea, select {
-  transition: var(--transition);
-}
-/* Focus states */
-a:focus, button:focus, input:focus, textarea:focus {
-  outline: 3px solid var(--pink-accent);
-  outline-offset: 2px;
-}
-/* Disabled states */
-button:disabled, input:disabled, textarea:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* ========================================
-   🎯 INTERACTIVE BUTTON - ENHANCED
-======================================== */
-.btn-open-envelope {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 18px 48px;
-  /* Beautiful Gradient */
-  background: linear-gradient(135deg, 
-    #FFB6C1 0%, 
-    #FF8FA3 50%, 
-    #8B6F47 100%
-  );
-  background-size: 200% 200%;
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-size: 18px;
-  font-weight: 600;
-  font-family: 'Poppins', sans-serif;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  /* Beautiful Shadow */
-  box-shadow: 
-    0 10px 30px rgba(255, 143, 163, 0.4),
-    0 5px 15px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  /* Smooth Transitions */
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-  overflow: hidden;
-  /* Subtle Animation */
-  animation: btnGlow 3s ease-in-out infinite;
-}
-/* Glow Animation */
-@keyframes btnGlow {
-  0%, 100% {
-    background-position: 0% 50%;
-    box-shadow: 
-      0 10px 30px rgba(255, 143, 163, 0.4),
-      0 5px 15px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  }
-  50% {
-    background-position: 100% 50%;
-    box-shadow: 
-      0 12px 35px rgba(255, 143, 163, 0.5),
-      0 6px 20px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  }
-}
-/* Shine Effect Overlay */
-.btn-open-envelope::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.4),
-    transparent
-  );
-  transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-/* Hover State */
-.btn-open-envelope:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 
-    0 15px 40px rgba(255, 143, 163, 0.5),
-    0 8px 25px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6),
-    0 0 0 4px rgba(255, 182, 193, 0.3);
-}
-.btn-open-envelope:hover::before {
-  left: 100%;
-}
-/* Active/Click State */
-.btn-open-envelope:active {
-  transform: translateY(-2px) scale(1.02);
-  transition: all 0.1s ease;
-}
-/* Button Text */
-.btn-text {
-  font-weight: 600;
-  position: relative;
-  z-index: 1;
-}
-/* Button Icon */
-.btn-icon {
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  animation: iconWiggle 2s ease-in-out infinite;
-  position: relative;
-  z-index: 1;
-}
-@keyframes iconWiggle {
-  0%, 100% { 
-    transform: rotate(0deg) translateY(0); 
-  }
-  25% { 
-    transform: rotate(-10deg) translateY(-3px); 
-  }
-  50% { 
-    transform: rotate(0deg) translateY(0); 
-  }
-  75% { 
-    transform: rotate(10deg) translateY(-3px); 
-  }
-}
-/* Disabled State */
-.btn-open-envelope:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-  animation: none;
-  transform: scale(0.98);
-  box-shadow: 
-    0 5px 15px rgba(255, 143, 163, 0.2),
-    0 3px 8px rgba(0, 0, 0, 0.1);
-}
-.btn-open-envelope:disabled .btn-icon {
-  animation: none;
-}
-/* Focus State (Keyboard Navigation) */
-.btn-open-envelope:focus {
-  outline: none;
-  box-shadow: 
-    0 15px 40px rgba(255, 143, 163, 0.5),
-    0 8px 25px rgba(0, 0, 0, 0.15),
-    0 0 0 4px rgba(255, 182, 193, 0.5);
-}
-/* ========================================
-   🎨 BUTTON VARIANTS (Optional)
-======================================== */
-/* Variant 1: Soft Pink */
-.btn-open-envelope.soft {
-  background: linear-gradient(135deg, 
-    #FFE4E1 0%, 
-    #FFB6C1 50%, 
-    #FFC0CB 100%
-  );
-  color: var(--mocha-dark);
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-}
-/* Variant 2: Mocha Elegant */
-.btn-open-envelope.mocha {
-  background: linear-gradient(135deg, 
-    #C8AD7F 0%, 
-    #8B6F47 50%, 
-    #6F4E37 100%
-  );
-  color: white;
-}
-/* Variant 3: Rose Gold */
-.btn-open-envelope.rose-gold {
-  background: linear-gradient(135deg, 
-    #E8C3B9 0%, 
-    #D4A5A5 50%, 
-    #B08972 100%
-  );
-  color: white;
-}
-/* ========================================
-   📱 RESPONSIVE BUTTON
-======================================== */
-@media (max-width: 768px) {
-  .btn-open-envelope {
-    padding: 16px 40px;
-    font-size: 17px;
-    gap: 10px;
-  }
-  .btn-icon {
-    font-size: 18px;
-  }
-}
-@media (max-width: 480px) {
-  .btn-open-envelope {
-    padding: 14px 36px;
-    font-size: 16px;
-    gap: 8px;
-  }
-  .btn-icon {
-    font-size: 17px;
-  }
-}
-/* ========================================
-   💫 RIPPLE EFFECT ON CLICK
-======================================== */
-.btn-open-envelope .ripple {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.6);
-  transform: scale(0);
-  animation: rippleEffect 0.6s ease-out;
-  pointer-events: none;
-}
-@keyframes rippleEffect {
-  to {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-
-/* ========================================
-   ⏰ SECTION WAKTU + MEMPELAI (COMBINED)
-======================================== */
-/* ========================================
-   ⏰ SECTION WAKTU - COMPACT 1 PAGE
-======================================== */
-#sectionWaktu {
-  padding: 40px 20px; /* ✅ UBAH jadi 60px 20px */
-  background: linear-gradient(135deg, var(--cream) 0%, var(--pink-soft) 100%);
-  min-height: 100vh; /* ✅ PASTIKAN INI ADA */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* ✅ UBAH dari center ke flex-start */
-  overflow-y: auto; /* ✅ GANTI jadi auto (sebelumnya auto, good) */
-}
-/* ========================================
-   📝 PART 1: INTRO (Bismillah & Salam)
-======================================== */
-.waktu-intro {
-  max-width: 700px;
-  margin: 0 auto 60px;
-  text-align: center;
-  animation: fadeInUp 0.8s ease;
-}
-.bismillah {
-  width: 80%;
-  max-width: 200px;
-  min-width: 150px;
-  margin-bottom: 28px;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-  animation: fadeIn 1s ease;
-}
-.bodytext {
-  font-size: 15px;
-  line-height: 1.9;
-  color: var(--text);
-  font-family: var(--font-body);
-}
-.highlight-name {
-  display: block;
-  font-size: 22px;
-  color: var(--pink-accent);
-  font-family: var(--font-display);
-  margin: 16px 0 12px;
-  font-weight: 700;
-  animation: shimmer 3s linear infinite;
-}
-/* ========================================
-   🎀 DIVIDER
-======================================== */
-.section-divider {
-  text-align: center;
-  margin: 60px auto;
-  position: relative;
-  max-width: 600px;
-}
-.section-divider::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--pink-medium) 20%,
-    var(--pink-medium) 80%,
-    transparent
-  );
-}
-.section-divider span {
-  display: inline-block;
-  background: var(--cream);
-  padding: 0 24px;
-  font-size: 36px;
-  position: relative;
-  z-index: 1;
-  animation: heartBeat 1.5s infinite;
-}
-/* ========================================
-   👰🤵 PART 2: PROFIL MEMPELAI
-======================================== */
-/* ========================================
-   👰🤵 MEMPELAI CONTAINER - FIXED
-======================================== */
-.mempelai-container {
-  display: grid;
-  gap: 40px;
-  max-width: 1200px;
-  margin: 50px auto 60px;
-  align-items: center;
-}
-/* ========================================
-   💻 DESKTOP LAYOUT (3 KOLOM)
-======================================== */
-@media (min-width: 993px) {
-  .mempelai-container {
-    grid-template-columns: 1fr auto 1fr;
-  }
-  /* Default order di desktop: Bride | Photo | Groom */
-  .bride-card {
-    order: 1;
-  }
-  .mempelai-photo-wrapper {
-    order: 2;
-  }
-  .groom-card {
-    order: 3;
-  }
-}
-/* ========================================
-   📱 MOBILE LAYOUT (1 KOLOM)
-======================================== */
-@media (max-width: 992px) {
-  .mempelai-container {
-    display: flex !important; /* ✅ FORCE FLEX */
-    flex-direction: column !important; /* ✅ FORCE COLUMN */
-    gap: 30px;
-  }
-  /* ✅ URUTAN MOBILE: WANITA → FOTO → PRIA */
-  .bride-card {
-    order: 1 !important; /* ✅ Wanita pertama */
-  }
-  .mempelai-photo-wrapper {
-    order: 2 !important; /* ✅ Foto kedua */
-  }
-  .groom-card {
-    order: 3 !important; /* ✅ Pria ketiga */
-  }
-  /* Styling */
-  .mempelai-card,
-  .mempelai-photo-wrapper {
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-  .mempelai-photo-frame {
-    width: 240px;
-    height: 300px;
-  }
-}
-@media (max-width: 768px) {
-  .mempelai-container {
-    gap: 24px;
-  }
-  .mempelai-photo-frame {
-    width: 220px;
-    height: 280px;
-  }
-  .mempelai-name {
-    font-size: 24px;
-  }
-  .mempelai-card {
-    padding: 28px 24px;
-  }
-}
-@media (max-width: 480px) {
-  .mempelai-container {
-    gap: 20px;
-  }
-  .mempelai-photo-frame {
-    width: 200px;
-    height: 250px;
-  }
-  .mempelai-name {
-    font-size: 22px;
-  }
-}
-/* ========================================
-   🎴 MEMPELAI CARD
-======================================== */
-.mempelai-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 24px;
-  padding: 32px 28px;
-  box-shadow: var(--shadow-lg);
-  border: 2px solid var(--pink-soft);
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-  animation: fadeInUp 1s ease;
-}
-.mempelai-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--pink-accent), var(--mocha-medium));
-}
-.mempelai-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 
-    0 20px 50px rgba(111, 78, 55, 0.2),
-    0 0 0 4px rgba(255, 182, 193, 0.2);
-  border-color: var(--pink-medium);
-}
-/* Header */
-.mempelai-header {
-  text-align: center;
-  margin-bottom: 24px;
-}
-.mempelai-icon {
-  font-size: 48px;
-  display: block;
-  margin-bottom: 12px;
-  animation: iconFloat 3s ease-in-out infinite;
-}
-@keyframes iconFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-.mempelai-label {
-  font-family: var(--font-script);
-  font-size: 24px;
-  color: var(--mocha-dark);
-  font-weight: 400;
-  margin: 0;
-}
-/* Content */
-.mempelai-content {
-  text-align: center;
-}
-.mempelai-name {
-  font-family: var(--font-display);
-  font-size: 28px;
-  color: var(--mocha-dark);
-  margin: 0 0 8px 0;
-  font-weight: 700;
-  line-height: 1.3;
-}
-.mempelai-title {
-  font-size: 16px;
-  color: var(--pink-accent);
-  font-weight: 500;
-  margin: 0 0 20px 0;
-  font-family: var(--font-body);
-}
-.mempelai-divider {
-  width: 60px;
-  height: 2px;
-  background: var(--pink-medium);
-  margin: 20px auto;
-  position: relative;
-}
-.mempelai-divider::before {
-  content: '♥';
-  position: absolute;
-  top: -9px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--pink-accent);
-  font-size: 18px;
-}
-.mempelai-desc {
-  font-size: 14px;
-  color: var(--text-light);
-  margin: 16px 0 8px 0;
-  font-style: italic;
-}
-.mempelai-parents {
-  font-size: 15px;
-  color: var(--text);
-  line-height: 1.8;
-  margin: 0 0 24px 0;
-}
-.mempelai-parents strong {
-  color: var(--mocha-dark);
-  font-weight: 600;
-}
-.mempelai-social {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 24px;
-  background: linear-gradient(135deg, var(--pink-soft), white);
-  border: 2px solid var(--pink-medium);
-  border-radius: 30px;
-  color: var(--mocha-dark);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-  transition: var(--transition);
-  box-shadow: var(--shadow-sm);
-}
-.mempelai-social:hover {
-  background: linear-gradient(135deg, var(--pink-medium), var(--pink-soft));
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--pink-accent);
-}
-.mempelai-social i {
-  font-size: 18px;
-  color: var(--pink-accent);
-}
-/* ========================================
-   📸 FOTO TENGAH
-======================================== */
-.mempelai-photo-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  animation: scaleUp 1s ease;
-}
-.mempelai-photo-frame {
-  width: 280px;
-  height: 350px;
-  position: relative;
-  border-radius: 200px 200px 40px 40px;
-  overflow: hidden;
-  box-shadow: 
-    0 0 0 8px rgba(255, 255, 255, 0.5),
-    0 0 0 14px var(--pink-soft),
-    var(--shadow-xl);
-  transition: var(--transition);
-}
-.mempelai-photo-frame:hover {
-  transform: scale(1.05) rotate(3deg);
-  box-shadow: 
-    0 0 0 8px rgba(255, 255, 255, 0.7),
-    0 0 0 14px var(--pink-medium),
-    0 20px 60px rgba(111, 78, 55, 0.3);
-}
-.mempelai-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: var(--transition);
-  max-width: 100%;  /* ✅ TAMBAHKAN INI */
-  display: block;   /* ✅ TAMBAHKAN INI */
-}
-.mempelai-photo-frame:hover .mempelai-photo {
-  transform: scale(1.1);
-}
-/* Overlay Ampersand */
-.photo-overlay {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 
-    0 4px 15px rgba(111, 78, 55, 0.2),
-    0 0 0 4px var(--pink-soft);
-  border: 3px solid white;
-  transition: var(--transition);
-}
-.mempelai-photo-frame:hover .photo-overlay {
-  transform: translateX(-50%) scale(1.1);
-  box-shadow: 
-    0 6px 20px rgba(111, 78, 55, 0.3),
-    0 0 0 6px var(--pink-medium);
-}
-.photo-ampersand {
-  font-family: var(--font-display);
-  font-size: 36px;
-  color: var(--pink-accent);
-  font-weight: 700;
-  animation: ampersandSpin 4s ease-in-out infinite;
-}
-@keyframes ampersandSpin {
-  0%, 100% { 
-    transform: rotate(-5deg) scale(1); 
-  }
-  50% { 
-    transform: rotate(5deg) scale(1.1); 
-  }
-}
-/* Decoration */
-.photo-decoration {
-  font-size: 40px;
-  animation: decorationPulse 2s ease-in-out infinite;
-}
-@keyframes decorationPulse {
-  0%, 100% { 
-    transform: scale(1); 
-    opacity: 0.8;
-  }
-  50% { 
-    transform: scale(1.2); 
-    opacity: 1;
-  }
-}
-/* ========================================
-   ⏰ SECTION WAKTU - COMPACT 1 PAGE
-======================================== */
-/* #sectionWaktu {
-  padding: 40px 20px;
-  background: linear-gradient(135deg, var(--cream) 0%, var(--pink-soft) 100%);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow-y: auto; 
-} */
-/* ========================================
-   📝 PART 1: INTRO - COMPACT
-======================================== */
-.waktu-intro {
-  max-width: 700px;
-  margin: 0 auto 30px;
-  text-align: center;
-}
-.bismillah {
-  width: 80%; /* ✅ Lebih kecil */
-  max-width: 140px;
-  min-width: 100px;
-  margin-bottom: 16px; /* ✅ Kurangi margin */
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-}
-.bodytext {
-  font-size: 13px; /* ✅ Lebih kecil */
-  line-height: 1.7;
-  color: var(--text);
-  font-family: var(--font-body);
-}
-.highlight-name {
-  display: block;
-  font-size: 18px; /* ✅ Lebih kecil */
-  color: var(--pink-accent);
-  font-family: var(--font-display);
-  margin: 10px 0 8px;
-  font-weight: 700;
-}
-/* ========================================
-   🎀 DIVIDER - COMPACT
-======================================== */
-.section-divider {
-  text-align: center;
-  margin: 30px auto; /* ✅ Margin dikurangi */
-  position: relative;
-  max-width: 600px;
-}
-.section-divider::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--pink-medium) 20%,
-    var(--pink-medium) 80%,
-    transparent
-  );
-}
-.section-divider span {
-  display: inline-block;
-  background: var(--cream);
-  padding: 0 20px;
-  font-size: 28px; /* ✅ Lebih kecil */
-  position: relative;
-  z-index: 1;
-  animation: heartBeat 1.5s infinite;
-}
-/* ========================================
-   📝 SECTION TITLE - COMPACT
-======================================== */
-.section-title {
-  font-size: 32px; /* ✅ Lebih kecil */
-  margin-bottom: 20px;
-}
-/* ========================================
-   👰🤵 MEMPELAI CONTAINER - COMPACT
-======================================== */
-.mempelai-container {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 24px; /* ✅ Gap dikurangi */
-  max-width: 1100px;
-  margin: 30px auto; /* ✅ Margin dikurangi */
-  align-items: center;
-}
-/* ========================================
-   🎴 MEMPELAI CARD - COMPACT
-======================================== */
-.mempelai-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 20px 18px; /* ✅ Padding dikurangi */
-  box-shadow: var(--shadow-md);
-  border: 2px solid var(--pink-soft);
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-}
-.mempelai-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--pink-accent), var(--mocha-medium));
-}
-.mempelai-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--pink-medium);
-}
-/* Header - Compact */
-.mempelai-header {
-  text-align: center;
-  margin-bottom: 16px; /* ✅ Margin dikurangi */
-}
-.mempelai-icon {
-  font-size: 36px; /* ✅ Lebih kecil */
-  display: block;
-  margin-bottom: 8px;
-  animation: iconFloat 3s ease-in-out infinite;
-}
-.mempelai-label {
-  font-family: var(--font-script);
-  font-size: 20px; /* ✅ Lebih kecil */
-  color: var(--mocha-dark);
-  font-weight: 400;
-  margin: 0;
-}
-/* Content - Compact */
-.mempelai-content {
-  text-align: center;
-}
-.mempelai-name {
-  font-family: var(--font-display);
-  font-size: 22px; /* ✅ Lebih kecil */
-  color: var(--mocha-dark);
-  margin: 0 0 6px 0;
-  font-weight: 700;
-  line-height: 1.3;
-}
-.mempelai-title {
-  font-size: 14px; /* ✅ Lebih kecil */
-  color: var(--pink-accent);
-  font-weight: 500;
-  margin: 0 0 14px 0;
-}
-.mempelai-divider {
-  width: 50px; /* ✅ Lebih kecil */
-  height: 2px;
-  background: var(--pink-medium);
-  margin: 14px auto;
-  position: relative;
-}
-.mempelai-divider::before {
-  content: '♥';
-  position: absolute;
-  top: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--pink-accent);
-  font-size: 16px;
-}
-.mempelai-desc {
-  font-size: 12px; /* ✅ Lebih kecil */
-  color: var(--text-light);
-  margin: 12px 0 6px 0;
-  font-style: italic;
-}
-.mempelai-parents {
-  font-size: 13px; /* ✅ Lebih kecil */
-  color: var(--text);
-  line-height: 1.6;
-  margin: 0 0 16px 0;
-}
-.mempelai-parents strong {
-  color: var(--mocha-dark);
-  font-weight: 600;
-}
-.mempelai-social {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 18px; /* ✅ Padding dikurangi */
-  background: linear-gradient(135deg, var(--pink-soft), white);
-  border: 2px solid var(--pink-medium);
-  border-radius: 25px;
-  color: var(--mocha-dark);
-  text-decoration: none;
-  font-size: 12px; /* ✅ Lebih kecil */
-  font-weight: 600;
-  transition: var(--transition);
-  box-shadow: var(--shadow-sm);
-}
-.mempelai-social:hover {
-  background: linear-gradient(135deg, var(--pink-medium), var(--pink-soft));
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--pink-accent);
-}
-.mempelai-social i {
-  font-size: 16px;
-  color: var(--pink-accent);
-}
-/* ========================================
-   📸 FOTO TENGAH - COMPACT
-======================================== */
-.mempelai-photo-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-.mempelai-photo-frame {
-  width: 200px; /* ✅ Lebih kecil */
-  height: 250px; /* ✅ Lebih kecil */
-  position: relative;
-  border-radius: 150px 150px 30px 30px;
-  overflow: hidden;
-  box-shadow: 
-    0 0 0 6px rgba(255, 255, 255, 0.5),
-    0 0 0 10px var(--pink-soft),
-    var(--shadow-lg);
-  transition: var(--transition);
-}
-.mempelai-photo-frame:hover {
-  transform: scale(1.05) rotate(3deg);
-  box-shadow: 
-    0 0 0 6px rgba(255, 255, 255, 0.7),
-    0 0 0 10px var(--pink-medium),
-    0 15px 40px rgba(111, 78, 55, 0.25);
-}
-.mempelai-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: var(--transition);
-}
-.mempelai-photo-frame:hover .mempelai-photo {
-  transform: scale(1.08);
-}
-/* Overlay Ampersand - Compact */
-.photo-overlay {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  width: 55px; /* ✅ Lebih kecil */
-  height: 55px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 
-    0 4px 12px rgba(111, 78, 55, 0.2),
-    0 0 0 3px var(--pink-soft);
-  border: 2px solid white;
-}
-.photo-ampersand {
-  font-family: var(--font-display);
-  font-size: 28px; /* ✅ Lebih kecil */
-  color: var(--pink-accent);
-  font-weight: 700;
-  animation: ampersandSpin 4s ease-in-out infinite;
-}
-/* Decoration - Compact */
-.photo-decoration {
-  font-size: 32px; /* ✅ Lebih kecil */
-  animation: decorationPulse 2s ease-in-out infinite;
-}
-/* ========================================
-   ⏰ WAKTU DETAIL - COMPACT
-======================================== */
-.waktu-detail {
-  max-width: 450px;
-  margin: 0 auto;
-}
-.card-soft-full {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  padding: 20px 28px; /* ✅ Padding dikurangi */
-  border-radius: 18px;
-  box-shadow: var(--shadow-md);
-  border: 2px solid var(--pink-soft);
-  text-align: center;
-  transition: var(--transition);
-}
-.card-soft-full:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--pink-medium);
-}
-.card-soft-full p {
-  font-size: 14px; /* ✅ Lebih kecil */
-  line-height: 1.8;
-  color: var(--text);
-  margin: 6px 0;
-}
-.card-soft-full b {
-  color: var(--mocha-dark);
-  font-weight: 600;
-  font-size: 15px;
-}
-.card-soft-full #waktuTamu {
-  color: var(--pink-accent);
-  font-weight: 600;
-}
-/* ========================================
-   📱 RESPONSIVE - TETAP COMPACT
-======================================== */
-@media (max-width: 992px) {
-  #sectionWaktu {
-    padding: 30px 16px;
-  }
-  .mempelai-container {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  .mempelai-photo-wrapper {
-    order: 1;
-  }
-  .bride-card {
-    order: 2;
-  }
-  .groom-card {
-    order: 3;
-  }
-  .mempelai-photo-frame {
-    width: 180px;
-    height: 230px;
-  }
-  .mempelai-card {
-    max-width: 450px;
-    margin: 0 auto;
-  }
-}
-@media (max-width: 768px) {
-  #sectionWaktu {
-    padding: 25px 16px;
-  }
-  .bismillah {
-    width: 80%;
-  }
-  .bodytext {
-    font-size: 12px;
-  }
-  .highlight-name {
-    font-size: 16px;
-  }
-  .section-divider {
-    margin: 20px auto;
-  }
-  .section-divider span {
-    font-size: 24px;
-  }
-  .section-title {
-    font-size: 28px;
-    margin-bottom: 16px;
-  }
-  .mempelai-photo-frame {
-    width: 160px;
-    height: 200px;
-  }
-  .photo-ampersand {
-    font-size: 24px;
-  }
-  .photo-overlay {
-    width: 50px;
-    height: 50px;
-  }
-  .mempelai-name {
-    font-size: 20px;
-  }
-  .card-soft-full {
-    padding: 18px 24px;
-  }
-}
-@media (max-width: 480px) {
-  #sectionWaktu {
-    padding: 20px 14px;
-  }
-  .bismillah {
-    width: 80%;
-  }
-  .bodytext {
-    font-size: 11px;
-    line-height: 1.6;
-  }
-    .highlight-name {
-    font-size: 15px;
-  }
-  .section-divider {
-    margin: 18px auto;
-  }
-  .section-divider span {
-    font-size: 22px;
-  }
-  .section-title {
-    font-size: 24px;
-    margin-bottom: 14px;
-  }
-  .mempelai-photo-frame {
-    width: 150px;
-    height: 190px;
-  }
-  .mempelai-icon {
-    font-size: 32px;
-  }
-  .mempelai-label {
-    font-size: 18px;
-  }
-  .mempelai-name {
-    font-size: 18px;
-  }
-  .mempelai-title {
-    font-size: 13px;
-  }
-  .mempelai-desc {
-    font-size: 11px;
-  }
-  .mempelai-parents {
-    font-size: 12px;
-  }
-  .photo-decoration {
-    font-size: 28px;
-  }
-  .photo-ampersand {
-    font-size: 22px;
-  }
-  .photo-overlay {
-    width: 45px;
-    height: 45px;
-  }
-  .card-soft-full {
-    padding: 16px 20px;
-  }
-  .card-soft-full p {
-    font-size: 13px;
-  }
-  .card-soft-full b {
-    font-size: 14px;
-  }
-}
-/* ========================================
-   🎯 EXTRA COMPACT untuk layar pendek
-======================================== */
-@media (max-height: 800px) {
-  #sectionWaktu {
-    padding: 30px 20px;
-  }
-  .bismillah {
-    width: 90%;
-    margin-bottom: 12px;
-  }
-  .waktu-intro {
-    margin-bottom: 20px;
-  }
-  .bodytext {
-    font-size: 12px;
-    line-height: 1.6;
-  }
-  .section-divider {
-    margin: 20px auto;
-  }
-  .section-divider span {
-    font-size: 24px;
-  }
-  .section-title {
-    font-size: 28px;
-    margin-bottom: 16px;
-  }
-  .mempelai-container {
-    margin: 20px auto;
-    gap: 20px;
-  }
-  .mempelai-card {
-    padding: 16px 14px;
-  }
-  .mempelai-icon {
-    font-size: 32px;
-    margin-bottom: 6px;
-  }
-  .mempelai-name {
-    font-size: 20px;
-  }
-  .mempelai-photo-frame {
-    width: 180px;
-    height: 220px;
-  }
-  .card-soft-full {
-    padding: 18px 24px;
-  }
-}
-@media (max-height: 700px) {
-  #sectionWaktu {
-    padding: 20px 20px;
-    overflow-y: auto; /* Allow scroll */
-  }
-  .bismillah {
-    width: 80%;
-    margin-bottom: 10px;
-  }
-  .waktu-intro {
-    margin-bottom: 16px;
-  }
-  .section-divider {
-    margin: 16px auto;
-  }
-  .mempelai-container {
-    margin: 16px auto;
-    gap: 16px;
-  }
-  .mempelai-photo-frame {
-    width: 160px;
-    height: 200px;
-  }
 }
 
 /* ========================================
@@ -3093,69 +1642,13 @@ button:disabled, input:disabled, textarea:disabled {
   padding: 80px 20px;
   background: linear-gradient(135deg, var(--cream) 0%, var(--beige) 100%);
 }
-/* ========================================
-   📦 WISHES CONTAINER
-======================================== */
-/* ========================================
-   💬 WISHES CONTAINER - RESPONSIVE
-======================================== */
 .wishes-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* ✅ Desktop: 2 kolom */
+  grid-template-columns: repeat(2, 1fr);
   gap: 30px;
   max-width: 100%;
   margin: 0 auto;
 }
-/* ========================================
-   📱 MOBILE: STACK VERTIKAL
-======================================== */
-@media (max-width: 992px) {
-  .wishes-container {
-    grid-template-columns: 1fr; /* ✅ MOBILE: 1 kolom */
-    gap: 24px;
-  }
-  .wishes-card {
-    max-width: 700px;
-    margin: 0 auto;
-    width: 100%;
-  }
-  /* ✅ FORM di atas */
-  .wishes-form-card {
-    order: 1;
-  }
-  /* ✅ LIVE STREAM di bawah */
-  .wishes-live-card {
-    order: 2;
-  }
-  .wishes-live-wrapper {
-    max-height: 400px; /* ✅ Biar ga terlalu panjang */
-  }
-}
-@media (max-width: 768px) {
-  .wishes-container {
-    gap: 20px;
-  }
-  .wishes-card {
-    padding: 32px 24px;
-  }
-  .wishes-live-wrapper {
-    max-height: 350px;
-  }
-}
-@media (max-width: 480px) {
-  .wishes-container {
-    gap: 16px;
-  }
-  .wishes-card {
-    padding: 28px 20px;
-  }
-  .wishes-live-wrapper {
-    max-height: 300px;
-  }
-}
-/* ========================================
-   🎴 WISHES CARD
-======================================== */
 .wishes-card {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
@@ -3167,10 +1660,9 @@ button:disabled, input:disabled, textarea:disabled {
   position: relative;
   overflow: hidden;
   animation: fadeInUp 0.8s ease;
-  max-height: 650px;
-  word-wrap: break-word;      /* ✅ TAMBAHKAN INI */
-  overflow-wrap: break-word;  /* ✅ TAMBAHKAN INI */
-  hyphens: auto;              /* ✅ TAMBAHKAN INI */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 .wishes-card::before {
   content: '';
@@ -3188,45 +1680,35 @@ button:disabled, input:disabled, textarea:disabled {
     0 0 0 4px rgba(255, 182, 193, 0.2);
   border-color: var(--pink-medium);
 }
-/* ========================================
-   🎯 WISHES ICON
-======================================== */
-/* ========================================
-   🎯 WISHES ICON - SMALLER VERSION
-======================================== */
 .wishes-icon-wrapper {
   text-align: center;
-  margin-bottom: 20px;  /* ✅ UBAH dari 24px */
+  margin-bottom: 20px;
 }
 .wishes-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 50px;           /* ✅ UBAH dari 80px */
-  height: 50px;          /* ✅ UBAH dari 80px */
+  width: 50px;
+  height: 50px;
   background: linear-gradient(135deg, var(--pink-accent), var(--rose));
   border-radius: 50%;
-  font-size: 28px;       /* ✅ UBAH dari 36px */
+  font-size: 28px;
   color: white;
   box-shadow: 
-    0 6px 16px rgba(255, 112, 150, 0.3),  /* ✅ UBAH dari 8px 20px */
-    0 0 0 6px rgba(255, 228, 225, 0.3);   /* ✅ UBAH dari 8px */
+    0 6px 16px rgba(255, 112, 150, 0.3),
+    0 0 0 6px rgba(255, 228, 225, 0.3);
   animation: iconPulse 2s ease-in-out infinite;
 }
-/* ========================================
-   📝 WISHES CONTENT
-======================================== */
-/* ✅ SESUDAHNYA */
 .wishes-content {
   text-align: center;
-  width: 100%;        /* ✅ UBAH JADI 100% */
-  max-width: 700px;   /* ✅ TAMBAHKAN MAX-WIDTH */
+  width: 100%;
+  max-width: 700px;
 }
 .wishes-title {
-  font-family: var(--font-display);
-  font-size: 28px;
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
   color: var(--mocha-dark);
-  margin: 0 0 16px 0;
+  margin: 0 0 14px 0;
   font-weight: 700;
 }
 .wishes-divider {
@@ -3277,7 +1759,7 @@ button:disabled, input:disabled, textarea:disabled {
   border: 2px solid var(--pink-soft);
   border-radius: 12px;
   background: white;
-  font-family: var(--font-body);
+  font-family: 'Poppins', sans-serif;
   font-size: 15px;
   color: var(--text);
   transition: var(--transition);
@@ -3300,6 +1782,77 @@ button:disabled, input:disabled, textarea:disabled {
   max-height: 100px;
 }
 /* ========================================
+   ✅ ATTENDANCE OPTIONS (RADIO)
+======================================== */
+.attendance-options {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.attendance-option {
+  flex: 1;
+  min-width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 12px;
+  background: white;
+  border: 2px solid var(--pink-soft);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  user-select: none;
+}
+.attendance-option:hover {
+  border-color: var(--pink-medium);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
+}
+.attendance-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.attendance-option input[type="radio"]:checked + .attendance-icon {
+  transform: scale(1.3);
+}
+.attendance-option input[type="radio"]:checked ~ .attendance-text {
+  font-weight: 700;
+  color: var(--mocha-dark);
+}
+.attendance-option:has(input:checked) {
+  background: linear-gradient(135deg, var(--pink-soft), white);
+  border-color: var(--pink-accent);
+  box-shadow: 
+    0 4px 12px rgba(255, 182, 193, 0.3),
+    0 0 0 4px rgba(255, 182, 193, 0.1);
+}
+.attendance-icon {
+  font-size: 20px;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  line-height: 1;
+}
+.attendance-icon.hadir {
+  filter: drop-shadow(0 2px 4px rgba(76, 175, 80, 0.3));
+}
+.attendance-icon.tidak-hadir {
+  filter: drop-shadow(0 2px 4px rgba(244, 67, 54, 0.3));
+}
+.attendance-icon.belum-tahu {
+  filter: drop-shadow(0 2px 4px rgba(255, 152, 0, 0.3));
+}
+.attendance-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-light);
+  transition: var(--transition);
+  line-height: 1;
+  text-align: center;
+}
+/* ========================================
    🔘 SUBMIT BUTTON
 ======================================== */
 .btn-submit {
@@ -3320,7 +1873,6 @@ button:disabled, input:disabled, textarea:disabled {
   box-shadow: 
     0 6px 20px rgba(111, 78, 55, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  /* margin-top: 24px; */
 }
 .btn-submit:hover {
   transform: translateY(-3px);
@@ -3343,8 +1895,6 @@ button:disabled, input:disabled, textarea:disabled {
    📊 FORM STATUS
 ======================================== */
 .form-status {
-  /* margin: 3px; */
-  /* padding: 3px; */
   border-radius: 10px;
   text-align: center;
   font-size: 14px;
@@ -3353,7 +1903,7 @@ button:disabled, input:disabled, textarea:disabled {
   transition: var(--transition);
 }
 .form-status.show {
-  margin: 10px; 
+  margin: 10px;
   opacity: 1;
 }
 .form-status.success {
@@ -3366,156 +1916,6 @@ button:disabled, input:disabled, textarea:disabled {
   color: #F44336;
   border: 2px solid rgba(244, 67, 54, 0.3);
 }
-
-
-/* ========================================
-   ✅ ATTENDANCE OPTIONS
-======================================== */
-.attendance-options {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 8px;
-}
-.attendance-option {
-  flex: 1;
-  min-width: 110px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 12px;
-  background: white;
-  border: 2px solid var(--pink-soft);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: var(--transition);
-  position: relative;
-  user-select: none;
-}
-.attendance-option:hover {
-  border-color: var(--pink-medium);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-sm);
-}
-/* Hide default radio */
-.attendance-option input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-/* Checked state */
-.attendance-option input[type="radio"]:checked + .attendance-icon {
-  transform: scale(1.3);
-}
-.attendance-option input[type="radio"]:checked ~ .attendance-text {
-  font-weight: 700;
-  color: var(--mocha-dark);
-}
-.attendance-option:has(input:checked) {
-  background: linear-gradient(135deg, var(--pink-soft), white);
-  border-color: var(--pink-accent);
-  box-shadow: 
-    0 4px 12px rgba(255, 182, 193, 0.3),
-    0 0 0 4px rgba(255, 182, 193, 0.1);
-}
-/* Icons */
-.attendance-icon {
-  font-size: 20px;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  line-height: 1;
-}
-.attendance-icon.hadir {
-  filter: drop-shadow(0 2px 4px rgba(76, 175, 80, 0.3));
-}
-.attendance-icon.tidak-hadir {
-  filter: drop-shadow(0 2px 4px rgba(244, 67, 54, 0.3));
-}
-.attendance-icon.belum-tahu {
-  filter: drop-shadow(0 2px 4px rgba(255, 152, 0, 0.3));
-}
-/* Text */
-.attendance-text {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-light);
-  transition: var(--transition);
-  line-height: 1;
-  text-align: center;
-}
-/* ========================================
-   💬 CHAT BUBBLE - ADD STATUS BADGE
-======================================== */
-.chat-bubble {
-  flex: 1;
-  background: white;
-  border: 2px solid var(--pink-soft);
-  padding: 14px 18px;
-  border-radius: 16px 16px 16px 4px;
-  box-shadow: var(--shadow-sm);
-  position: relative;
-  transition: var(--transition);
-  max-width: 100%;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-}
-/* ✅ BADGE KEHADIRAN */
-.attendance-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 11px;
-  font-weight: 600;
-  margin-top: 8px;
-  border: 1px solid;
-  background: rgba(255, 255, 255, 0.8);
-  line-height: 1;
-}
-.attendance-badge.hadir {
-  color: #4CAF50;
-  border-color: rgba(76, 175, 80, 0.3);
-  background: rgba(76, 175, 80, 0.05);
-}
-.attendance-badge.tidak-hadir {
-  color: #F44336;
-  border-color: rgba(244, 67, 54, 0.3);
-  background: rgba(244, 67, 54, 0.05);
-}
-.attendance-badge.belum-tahu {
-  color: #FF9800;
-  border-color: rgba(255, 152, 0, 0.3);
-  background: rgba(255, 152, 0, 0.05);
-}
-.attendance-badge-icon {
-  font-size: 14px;
-}
-/* ========================================
-   📱 RESPONSIVE ATTENDANCE
-======================================== */
-@media (max-width: 480px) {
-  .attendance-options {
-    gap: 8px;
-  }
-  .attendance-option {
-    min-width: 90px;
-    padding: 12px 8px;
-  }
-  .attendance-icon {
-    font-size: 28px;
-  }
-  .attendance-text {
-    font-size: 11px;
-  }
-  .attendance-badge {
-    font-size: 10px;
-    padding: 3px 8px;
-  }
-  .attendance-badge-icon {
-    font-size: 12px;
-  }
-}
 /* ========================================
    💬 LIVE WISHES STREAM
 ======================================== */
@@ -3526,10 +1926,9 @@ button:disabled, input:disabled, textarea:disabled {
   padding: 20px;
   max-height: 350px;
   overflow-y: auto;
-  overflow-x: hidden;  /* ✅ TAMBAHKAN INI */
+  overflow-x: hidden;
   margin-bottom: 16px;
 }
-/* Custom Scrollbar */
 .wishes-live-wrapper::-webkit-scrollbar {
   width: 8px;
 }
@@ -3544,9 +1943,6 @@ button:disabled, input:disabled, textarea:disabled {
 .wishes-live-wrapper::-webkit-scrollbar-thumb:hover {
   background: var(--pink-accent);
 }
-/* ========================================
-   💭 WISHES STREAM (Chat Items)
-======================================== */
 .wishes-stream {
   display: flex;
   flex-direction: column;
@@ -3559,23 +1955,29 @@ button:disabled, input:disabled, textarea:disabled {
   opacity: 0;
   transform: translateY(15px);
   animation: chatSlideIn 0.5s ease forwards;
+  max-width: 100%;
+  overflow: hidden;
+}
+@keyframes chatSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .chat-avatar {
-  width: 45px;
-  height: 45px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   object-fit: cover;
   background: var(--pink-soft);
   box-shadow: 
-    0 0 0 3px white,
+    0 0 0 2px white,
     var(--shadow-sm);
   flex-shrink: 0;
   border: 2px solid var(--pink-soft);
 }
-/* ❌ SEBELUMNYA */
-/* ✅ SESUDAHNYA */
 .chat-bubble {
-  flex: 1;                /* ✅ Sudah cukup untuk full width */
+  flex: 1;
   background: white;
   border: 2px solid var(--pink-soft);
   padding: 14px 18px;
@@ -3583,9 +1985,9 @@ button:disabled, input:disabled, textarea:disabled {
   box-shadow: var(--shadow-sm);
   position: relative;
   transition: var(--transition);
-  max-width: 100%;        /* ✅ TAMBAHKAN INI */
-  overflow-wrap: break-word;  /* ✅ TAMBAHKAN INI */
-  word-wrap: break-word;      /* ✅ TAMBAHKAN INI */
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 .chat-bubble::before {
   content: '';
@@ -3603,41 +2005,40 @@ button:disabled, input:disabled, textarea:disabled {
   box-shadow: var(--shadow-md);
   border-color: var(--pink-medium);
 }
+.chat-name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
 .chat-name {
-  font-family: var(--font-script);
+  font-family: 'Great Vibes', cursive;
   font-size: 20px;
   color: var(--mocha-dark);
-  margin-bottom: 6px;
   line-height: 1;
-  word-wrap: break-word;      /* ✅ TAMBAHKAN INI */
-  overflow-wrap: break-word;  /* ✅ TAMBAHKAN INI */
-  max-width: 100%;            /* ✅ TAMBAHKAN INI */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.attendance-icon {
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 .chat-message {
-  font-family: var(--font-body);
+  font-family: 'Poppins', sans-serif;
   font-size: 14px;
   line-height: 1.6;
   color: var(--text);
   margin: 0;
-  word-wrap: break-word;      /* ✅ TAMBAHKAN INI */
-  overflow-wrap: break-word;  /* ✅ TAMBAHKAN INI */
-  white-space: pre-wrap;      /* ✅ TAMBAHKAN INI (preserve spaces) */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
 }
-/* ========================================
-   📊 WISHES FOOTER
-======================================== */
 .wishes-footer {
   text-align: center;
   padding-top: 16px;
   border-top: 2px solid var(--pink-soft);
-}
-.wishes-count {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  color: var(--mocha-medium);
-  font-weight: 600;
 }
 .wishes-count {
   display: inline-flex;
@@ -3656,36 +2057,472 @@ button:disabled, input:disabled, textarea:disabled {
   font-size: 18px;
   font-weight: 700;
 }
+
 /* ========================================
-   📱 RESPONSIVE - CHAT FIX
+   📱 RESPONSIVE DESIGN
+======================================== */
+/* ========================================
+   ENVELOPE RESPONSIVE
 ======================================== */
 @media (max-width: 768px) {
+  .envelope-container {
+    width: 300px;
+    height: 230px;
+  }
+  .env-flap {
+    top: -115px;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 115px solid var(--mocha-light);
+  }
+  .env-flap::after {
+    bottom: -22px;
+    width: 44px;
+    height: 44px;
+    font-size: 24px;
+  }
+  .env-card {
+    padding: 18px 16px;
+    max-height: 180px;
+  }
+  .card-icon {
+    font-size: 28px;
+  }
+  .card-title {
+    font-size: 20px;
+  }
+  .card-name {
+    font-size: 18px;
+  }
+  .card-time {
+    font-size: 11px;
+  }
+  .btn-open-envelope {
+    padding: 16px 40px;
+    font-size: 17px;
+    gap: 10px;
+  }
+  .btn-icon {
+    font-size: 18px;
+  }
+}
+@media (max-width: 480px) {
+  .envelope-container {
+    width: 280px;
+    height: 210px;
+  }
+  .env-flap {
+    top: -105px;
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    border-bottom: 105px solid var(--mocha-light);
+  }
+  .env-flap::after {
+    bottom: -20px;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+  }
+  .env-card {
+    padding: 16px 14px;
+    max-height: 160px;
+  }
+  .card-icon {
+    font-size: 26px;
+  }
+  .card-title {
+    font-size: 18px;
+  }
+  .card-name {
+    font-size: 16px;
+  }
+  .card-time {
+    font-size: 10px;
+  }
+  .btn-open-envelope {
+    padding: 14px 36px;
+    font-size: 16px;
+    gap: 8px;
+  }
+  .btn-icon {
+    font-size: 17px;
+  }
+}
+
+/* ========================================
+   SIDEBAR RESPONSIVE
+======================================== */
+@media (max-width: 768px) {
+  html {
+    overflow: auto;
+    height: auto;
+    min-height: 100vh;
+  }
+  body {
+    overflow: auto;
+    min-height: 100vh;
+    height: auto;
+    position: relative;
+  }
+  #mainContainer {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100vh;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* ✅ HAPUS semua yang conflict */
+  #sidebarNav {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    /* ✅ FORCE KE BAWAH */
+    position: fixed;
+    bottom: 15px; /* ✅ Jarak dari bawah layar */
+    top: auto; /* ✅ RESET top */
+    left: 5%;
+    right: 5%;
+    width: 90%;
+    /* ✅ RESET transform yang bikin ke atas */
+    transform: translateX(0) translateY(0); /* ✅ GA ADA translateY(-50%) */
+    background: rgba(255, 255, 255, 0.95);
+    padding: 10px 12px 14px;
+    border-radius: 20px;
+    gap: 8px;
+    backdrop-filter: blur(10px);
+    border: 2px solid #E8C3B9;
+    box-shadow: var(--shadow-lg);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    z-index: 9999;
+  }
+  /* ✅ HIDE state */
+  #sidebarNav.sidebar-hidden {
+    transform: translateY(150%); /* ✅ Slide ke bawah (keluar layar) */
+  }
+  /* ✅ Custom scrollbar */
+  #sidebarNav::-webkit-scrollbar {
+    height: 5px;
+  }
+  #sidebarNav::-webkit-scrollbar-track {
+    background: rgba(232, 195, 185, 0.2);
+    border-radius: 10px;
+    margin: 0 10px;
+  }
+  #sidebarNav::-webkit-scrollbar-thumb {
+    background: #D4A5A5;
+    border-radius: 10px;
+  }
+  #sidebarNav::-webkit-scrollbar-thumb:hover {
+    background: #B08972;
+  }
+  /* ✅ Gradient fade */
+  #sidebarNav::before,
+  #sidebarNav::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 14px;
+    width: 20px;
+    pointer-events: none;
+    z-index: 1;
+  }
+  #sidebarNav::before {
+    left: 0;
+    background: linear-gradient(90deg, 
+      rgba(255, 255, 255, 0.95), 
+      transparent);
+  }
+  #sidebarNav::after {
+    right: 0;
+    background: linear-gradient(270deg, 
+      rgba(255, 255, 255, 0.95), 
+      transparent);
+  }
+  .sidebar-item {
+    flex-direction: column;
+    padding: 8px 12px;
+    font-size: 10px;
+    min-width: 75px;
+    max-width: 135px;
+    flex-shrink: 0;
+    gap: 4px;
+    border-width: 2px;
+  }
+  .sidebar-item i {
+    font-size: 20px;
+  }
+  .sidebar-item span {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .sidebar-item:hover {
+    transform: translateY(-3px) scale(1.03);
+  }
+  .sidebar-item.active {
+    transform: translateY(-5px) scale(1.05);
+  }
+  .sidebar-item.active span {
+    font-weight: 600;
+  }
+  /* ✅ Toggle button DI ATAS sidebar (center bottom screen) */
+  .sidebar-toggle-btn {
+    position: fixed;
+    top: auto;
+    bottom: 95px; /* ✅ Di atas sidebar */
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%); /* ✅ Center horizontal */
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    z-index: 10000;
+  }
+  .sidebar-toggle-btn.sidebar-visible,
+  .sidebar-toggle-btn.sidebar-closed {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%); /* ✅ Tetap center */
+  }
+  .sidebar-toggle-btn:hover {
+    transform: translateX(-50%) scale(1.1);
+  }
+  .sidebar-toggle-btn:active {
+    transform: translateX(-50%) scale(0.95);
+  }
+  .sidebar-toggle-btn i {
+    transform: rotate(-90deg); /* ✅ Chevron up */
+  }
+  .sidebar-toggle-btn.sidebar-closed i {
+    transform: rotate(90deg); /* ✅ Chevron down */
+  }
+  /* ✅ Music button adjust */
+  .music-floating {
+    position: fixed;
+    bottom: 105px; /* ✅ Di atas sidebar */
+    right: 20px;
+  }
+  .snap-section {
+    padding: 60px 16px;
+    min-height: 100vh;
+  }
+  #sectionHero {
+    min-height: 100vh;
+    padding: 80px 16px;
+  }
+  #sectionWaktu {
+    padding: 50px 16px;
+    min-height: 100vh;
+  }
+  #sectionLokasi {
+    padding: 60px 16px;
+    min-height: 100vh;
+  }
+  #sectionKomentar {
+    min-height: 100vh;
+    padding: 60px 16px;
+  }
+  .title, .title2 {
+    font-size: 3rem;
+  }
+  .title-script {
+    font-size: 2.5rem;
+  }
+  .section-title {
+    font-size: 2.2rem;
+    margin-bottom: 24px;
+  }
+  .card-soft, .card-soft-full {
+    padding: 24px;
+  }
+  .btn-primary {
+    padding: 12px 28px;
+    font-size: 15px;
+  }
+  .bismillah, .bismillah2 {
+    width: 70% !important;
+  }
+  .bodytext {
+    font-size: 14px;
+  }
+  .event-container {
+    grid-template-columns: 1fr;
+    max-height: none;
+    gap: 20px;
+  }
+  .event-card {
+    max-height: none;
+    padding: 20px 18px;
+  }
+  .event-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+  .event-title {
+    font-size: 20px;
+  }
+  .map-frame {
+    height: 120px;
+  }
+  .masonry-grid {
+    column-count: 2;
+  }
+  .gallery-scroll {
+    height: 50vh;
+  }
+  .wishes-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .wishes-card {
+    max-width: 700px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 32px 24px;
+  }
+  .wishes-form-card {
+    order: 1;
+  }
+  .wishes-live-card {
+    order: 2;
+  }
+  .wishes-live-wrapper {
+    max-height: 400px;
+  }
+  .wishes-icon {
+    width: 55px;
+    height: 55px;
+    font-size: 26px;
+  }
+  .wishes-title {
+    font-size: 22px;
+  }
   .wishes-content {
-    width: 100%;      /* ✅ Force 100% */
+    width: 100%;
     max-width: 100%;
     padding: 0;
   }
   .chat-bubble {
     padding: 12px 14px;
-    max-width: calc(100% - 57px); /* ✅ Avatar 45px + gap 12px */
+    max-width: calc(100% - 50px);
   }
   .chat-message {
     font-size: 13px;
     line-height: 1.5;
   }
-  .wishes-live-wrapper {
-    padding: 16px;
-    max-height: 350px;
+  .chat-avatar {
+    width: 34px;
+    height: 34px;
+  }
+  .mempelai-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 30px;
+  }
+  .bride-card {
+    order: 1 !important;
+  }
+  .mempelai-photo-wrapper {
+    order: 2 !important;
+  }
+  .groom-card {
+    order: 3 !important;
+  }
+  .mempelai-card,
+  .mempelai-photo-wrapper {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .mempelai-photo-frame {
+    width: 220px;
+    height: 280px;
+  }
+  .mempelai-name {
+    font-size: 20px;
+  }
+  .mempelai-card {
+    padding: 28px 24px;
   }
 }
+
 @media (max-width: 480px) {
+  #sidebarNav {
+    padding: 9px 10px 13px;
+    gap: 7px;
+    left: 3%;
+    right: 3%;
+    width: 94%;
+    bottom: 12px;
+  }
+  .sidebar-item {
+    padding: 7px 10px;
+    min-width: 70px;
+    max-width: 135px;
+  }
+  .sidebar-item i {
+    font-size: 18px;
+  }
+  .sidebar-item span {
+    font-size: 9px;
+  }
+  .sidebar-toggle-btn {
+    bottom: 90px;
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+  .music-floating {
+    bottom: 100px;
+  }
+  
+  .snap-section {
+    padding: 50px 14px;
+    min-height: 100vh;
+  }
+  #sectionHero {
+    min-height: 100vh;
+    padding: 60px 14px;
+  }
+  #sectionWaktu {
+    padding: 40px 14px;
+    min-height: 100vh;
+  }
+  .title, .title2 {
+    font-size: 2.5rem;
+    margin-bottom: -1.5rem;
+  }
+  .section-title {
+    font-size: 1.8rem;
+  }
+  .card-soft, .card-soft-full {
+    padding: 20px;
+    border-radius: 16px;
+  }
+  .gift-card {
+    min-width: 200px;
+  }
+  .wishes-container {
+    gap: 20px;
+  }
+  .wishes-card {
+    padding: 28px 20px;
+  }
+  .wishes-live-wrapper {
+    max-height: 350px;
+    padding: 16px;
+  }
   .chat-bubble {
     padding: 10px 12px;
     font-size: 12px;
   }
   .chat-avatar {
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
   }
   .chat-name {
     font-size: 17px;
@@ -3693,92 +2530,157 @@ button:disabled, input:disabled, textarea:disabled {
   .chat-message {
     font-size: 12px;
   }
-  .wishes-live-wrapper {
-    padding: 12px;
-    max-height: 300px;
+  .attendance-options {
+    gap: 8px;
+  }
+  .attendance-option {
+    min-width: 90px;
+    padding: 12px 8px;
+  }
+  .attendance-icon {
+    font-size: 28px;
+  }
+  .attendance-text {
+    font-size: 11px;
+  }
+  .mempelai-container {
+    gap: 20px;
+  }
+  .mempelai-photo-frame {
+    width: 200px;
+    height: 250px;
+  }
+  .mempelai-name {
+    font-size: 18px;
+  }
+  .mempelai-icon {
+    font-size: 32px;
+  }
+  .mempelai-label {
+    font-size: 18px;
+  }
+}
+@media (max-width: 360px) {
+  #sidebarNav {
+    padding: 8px 8px 12px;
+    gap: 6px;
+    bottom: 10px;
+  }
+  .sidebar-item {
+    padding: 6px 9px;
+    min-width: 65px;
+    max-width: 135px;
+  }
+  .sidebar-item i {
+    font-size: 17px;
+  }
+  .sidebar-item span {
+    font-size: 8.5px;
+  }
+  .sidebar-toggle-btn {
+    bottom: 85px;
+  }
+  .music-floating {
+    bottom: 95px;
   }
 }
 /* ========================================
-   ✨ ANIMATIONS
+   LANDSCAPE MODE
 ======================================== */
-@keyframes chatSlideIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+@media (max-height: 600px) and (orientation: landscape) {
+  .snap-section {
+    min-height: auto;
+    padding: 40px 20px;
+  }
+  #sectionHero {
+    min-height: 100vh;
   }
 }
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-/* Stagger animation */
-.wishes-form-card {
-  animation-delay: 0.1s;
-}
-.wishes-live-card {
-  animation-delay: 0.2s;
-}
-
 /* ========================================
-   🔧 FIX OVERFLOW & SMOOTH SCROLL
+   iOS SAFARI FIX
 ======================================== */
-/* ✅ Prevent horizontal scroll */
-html, body {
-  overflow-x: hidden;
-  max-width: 100vw;
+@supports (-webkit-touch-callout: none) {
+  html {
+    height: -webkit-fill-available;
+  }
+  body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+  #mainContainer {
+    height: 100vh;
+    height: -webkit-fill-available;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: auto;
+  }
+  .snap-section {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
 }
-/* ✅ Smooth scroll for all browsers */
-* {
-  scroll-behavior: smooth;
+/* ========================================
+   📄 FOOTER
+======================================== */
+.section {
+  padding: 40px 20px;
 }
-/* ✅ Fix: Container overflow */
-/* #mainContainer {
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-} */
-/* ✅ Fix: Section overflow */
-.snap-section {
-  overflow-x: hidden;
-  max-width: 100vw;
+footer, 
+.section:last-child {
+  background: linear-gradient(135deg, var(--mocha-light), var(--pink-soft));
+  border-top: 3px solid var(--pink-medium);
+  padding: 40px 20px;
+  text-align: center;
 }
-/* ✅ Fix: Long text wrap */
-.card-soft,
-.card-soft-full,
-.wishes-card,
-.event-card,
-.mempelai-card {
+footer p {
+  margin: 8px 0;
+  color: var(--text);
+  font-size: 14px;
+}
+footer p:first-child {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--mocha-dark);
+}
+/* ========================================
+   🎨 LIGHTBOX ENHANCEMENTS
+======================================== */
+.glightbox-clean .gslide-description {
+  font-size: 16px;
+  color: var(--text);
   background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 20px 18px;
-  box-shadow: var(--shadow-md);
-  border: 2px solid var(--pink-soft);
+  padding: 16px;
+  border-radius: 12px;
+}
+.glightbox-clean .gclose {
+  color: var(--pink-accent);
+  background: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  }
+/* ========================================
+   🎪 SPECIAL EFFECTS
+======================================== */
+.parallax {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+/* Smooth transitions */
+a, button, input, textarea, select {
   transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-  word-wrap: break-word;      /* ✅ TAMBAHKAN INI */
-  overflow-wrap: break-word;  /* ✅ TAMBAHKAN INI */
-  hyphens: auto;              /* ✅ TAMBAHKAN INI */
 }
-/* ✅ Fix: Images overflow */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+/* Focus states */
+a:focus, button:focus, input:focus, textarea:focus {
+  outline: 3px solid var(--pink-accent);
+  outline-offset: 2px;
 }
-/* ✅ Fix: Iframe responsive */
-iframe {
-  max-width: 100%;
-  display: block;
+/* Disabled states */
+button:disabled, input:disabled, textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
-
 /* ========================================
    📍 SCROLL INDICATOR (OPTIONAL)
 ======================================== */
@@ -3809,43 +2711,81 @@ iframe {
     transform: translateX(-50%) translateY(-5px);
   }
 }
-@media (max-width: 768px) {
-  .scroll-indicator {
-    bottom: 80px; /* Above sidebar */
+/* ========================================
+   🎯 EXTRA HEIGHT FIXES
+======================================== */
+@media (max-height: 800px) {
+  #sectionWaktu {
+    padding: 30px 20px;
+  }
+  .bismillah, .bismillah2 {
+    width: 90%;
+    margin-bottom: 12px;
+  }
+  .waktu-intro {
+    margin-bottom: 20px;
+  }
+  .bodytext {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .section-divider {
+    margin: 20px auto;
+  }
+  .section-divider span {
+    font-size: 24px;
+  }
+  .section-title {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+  .mempelai-container {
+    margin: 20px auto;
+    gap: 20px;
+  }
+  .mempelai-card {
+    padding: 16px 14px;
+  }
+  .mempelai-icon {
+    font-size: 32px;
+    margin-bottom: 6px;
+  }
+  .mempelai-name {
+    font-size: 20px;
+  }
+  .mempelai-photo-frame {
+    width: 180px;
+    height: 220px;
+  }
+  .card-soft-full {
+    padding: 18px 24px;
+  }
+}
+@media (max-height: 700px) {
+  #sectionWaktu {
+    padding: 20px 20px;
+    overflow-y: auto;
+  }
+  .bismillah, .bismillah2 {
+    width: 80%;
+    margin-bottom: 10px;
+  }
+  .waktu-intro {
+    margin-bottom: 16px;
+  }
+  .section-divider {
+    margin: 16px auto;
+  }
+  .mempelai-container {
+    margin: 16px auto;
+    gap: 16px;
+  }
+  .mempelai-photo-frame {
+    width: 160px;
+    height: 200px;
   }
 }
 
 /* ========================================
-   📱 MOBILE OPTIMIZED CLASS
+   ✅ END OF CSS FILE
 ======================================== */
-/* .mobile-optimized * {
-  animation-duration: 0.3s !important;
-  transition-duration: 0.3s !important;
-} */
-
-
-/* ========================================
-   🍎 iOS SAFARI SMOOTH SCROLL
-======================================== */
-@supports (-webkit-touch-callout: none) {
-  html {
-    height: -webkit-fill-available;
-  }
-  body {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-  }
-  #mainContainer {
-    height: 100vh;
-    height: -webkit-fill-available;
-    overflow-y: scroll; /* ✅ UBAH: dari auto ke scroll */
-    -webkit-overflow-scrolling: touch;
-    /* ✅ iOS MOMENTUM SCROLL */
-    scroll-behavior: auto; /* Disable smooth di iOS, pakai native momentum */
-  }
-  /* ✅ FORCE MOMENTUM */
-  .snap-section {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-  }
-}
