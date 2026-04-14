@@ -171,7 +171,7 @@ iframe {
 ======================================== */
 .envelope-container {
   width: 340px;
-  height: 260px;
+  height: 200px;
   position: relative;
   perspective: 1200px;
   margin: 0 auto 30px;
@@ -182,7 +182,7 @@ iframe {
   left: 8%;
   top: 10%;
   width: 84%;
-  max-height: 500px;
+  max-height: 180px;
   background: white;
   padding: 20px 40px 50px;
   border-radius: 16px;
@@ -196,13 +196,14 @@ iframe {
   overflow: hidden;
 }
 .env-card.card-out {
-  transform: translateY(-200px);
+  transform: translateY(-180px);
 }
 .card-header {
   margin-bottom: 10px;
 }
 .card-icon {
-  font-size: 30px;
+  margin-top: -15px;
+  font-size: 20px;
   display: block;
   margin-bottom: 6px;
   animation: iconPulse 2s ease infinite;
@@ -541,13 +542,14 @@ iframe {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
   pointer-events: none;
+  bottom: 40px;
 }
 .sidebar-toggle-btn.show {
   opacity: 1;
   pointer-events: auto;
 }
 .sidebar-toggle-btn.sidebar-visible {
-  right: 180px;
+  right: 240px;
 }
 .sidebar-toggle-btn.sidebar-closed {
   right: 20px;
@@ -742,6 +744,68 @@ iframe {
   margin-bottom: -1rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
 }
+
+/* Tablet */
+@media (max-width: 1920px) {
+  .title,
+  .title2 {
+    font-size: 2.7rem;
+    
+  }
+
+  .title-script {
+    font-size: 2.5rem;
+    padding-bottom: 10px;
+  }
+}
+/* Tablet */
+@media (max-width: 1024px) {
+  .title,
+  .title2 {
+    font-size: 2.5rem;
+  }
+
+  .title-script {
+    font-size: 3rem;
+  }
+}
+
+/* HP besar */
+@media (max-width: 768px) {
+  .title,
+  .title2 {
+    font-size: 1rem;
+
+  }
+
+  .title-script {
+    font-size: 1rem;
+    margin-top: -70px;
+    padding-bottom: 30px;
+  }
+
+  .title2 {
+    padding: 30px 0;
+  }
+}
+
+/* HP kecil */
+@media (max-width: 480px) {
+  .title,
+  .title2 {
+    font-size: 2.5rem;
+  }
+  
+  .title-script {
+    margin-top: 5px;
+    font-size: 2rem;
+  }
+
+  /* .title2 {
+    padding: 20px 0;
+  } */
+}
+
 .section-title {
   font-family: 'Great Vibes', cursive;
   font-size: clamp(2.2rem, 5vw, 3.5rem);
@@ -749,14 +813,14 @@ iframe {
   margin-bottom: 30px;
   text-align: center;
   position: relative;
-  padding-bottom: 15px;
+  /* padding-bottom: 15px; */
 }
 .section-title::after {
   content: '♥';
   display: block;
   font-size: 24px;
   color: var(--pink-accent);
-  margin-top: 10px;
+  /* margin-top: 10px; */
   animation: heartBeat 1.5s infinite;
 }
 @keyframes heartBeat {
@@ -769,7 +833,7 @@ iframe {
   color: var(--text-light);
   text-align: center;
   margin-top: -20px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   font-weight: 400;
   font-style: italic;
 }
@@ -808,6 +872,12 @@ iframe {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+.center-wrapper {
+  display: flex;
+  justify-content: center; /* horizontal center */
+  align-items: center;     /* vertical center (optional) */
 }
 /* ========================================
    🎴 CARDS
@@ -2067,7 +2137,7 @@ iframe {
 @media (max-width: 768px) {
   .envelope-container {
     width: 300px;
-    height: 230px;
+    height: 180px;
   }
   .env-flap {
     top: -115px;
@@ -2083,7 +2153,7 @@ iframe {
   }
   .env-card {
     padding: 18px 16px;
-    max-height: 180px;
+    max-height: 160px;
   }
   .card-icon {
     font-size: 28px;

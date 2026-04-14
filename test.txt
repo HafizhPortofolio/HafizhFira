@@ -1,2 +1,113 @@
-.countdown-end h3 {
-  font
+No Pesanan Shopee : 260330G4KACT5V
+
+Request : 
+1. Desain Amplop Depan Pakai Nama Hafizh & Fira
+2. Pakai gambar denah 
+3. serta disamping denah minta tambahan pakai qrcode maps untuk kedua tipe
+4. order : 25 PCS (16 Mei), 12 PCS (23 Mei Jam 12.00 - 14.00), 13 PCS (23 Mei Jam 10.00 - 14.00)
+
+Tipe 1 : 
+25 PCS : Memakai Tanggal Akad Nikah dan Tanggal Resepsi : 16 Mei 2026
+
+Nama Yang di dahulukan (Pria/Wanita) : Pria
+
+Data Mempelai Perempuan
+Nama lengkap :  drh. Shafira Salwa Salsabil
+Nama Panggilan : Fira
+Putri Ke : 1 (Anak ke 2)
+Nama Orang Tua : Bapak Ainur Farid (Alm.) & Ibu Tri Endang Wahyuni
+
+
+Data Mempelai Pria 
+Nama lengkap : Hafizh Maulana, ST.
+Nama Panggilan : Hafizh
+Putra Ke : 1 (Anak ke 1)
+Nama Orang Tua : Bapak Subagyo & Ibu Rachma Savira Hesti
+
+AKAD NIKAH 
+Hari & Tanggal : 15 Mei 2026
+Waktu : Tidak Pakai 
+Alamat : Karangploso - Malang
+
+RESEPSI 
+Hari & Tanggal : 16 Mei 2026 
+Waktu : 10.00-13.00
+Tempat :NK Cafe - Jl. Raya Kasin, Kasin, Ampeldento, Kec. Karang Ploso, Kabupaten Malang, Jawa Timur 65152
+
+Link google Maps : https://maps.app.goo.gl/ck2teh9SDPaMTvkR6
+
+List Nama Tamu Undangan 25 PCS:
+1. Bulik Halila di Surabaya
+2. Dian Aditya dan keluarga di Surabaya
+3. Bimo Wicaksono dan keluarga di Surabaya
+4. David Edward Wergin dan keluarga di Surabaya
+5. Bude Anik Mudzakkir Fagi di Bogor
+6. Sugiman dan keluarga di Bekasi
+7. Setiawan dan keluarga di Bandung
+8. Prihasto Setyanto dan keluarga di Bogor
+9. Yudi A Salampessy dan keluarga di Tangerang
+10. Ach Guzaeri Saleh dan keluarga di Sukamandi
+11. Iwan Hariyadi dan keluarga di Karawang
+12. Zet Zet Amanat dan keluarga di Cirebon
+13. Indra Gunawan dan keluarga di Sukamandi
+14. Ach Mustofa Saleh dan keluarga di Sukamandi
+15. Muhammad Noer dan keluarga di Jakarta
+16. Sartono dan keluarga di Jakarta
+17. Amicang di Tempat
+18. Bobby Setiawan di Tempat
+19-25. (dikosongkan) di Tempat
+
+
+
+Tipe 2 :
+12 PCS : Tanpa Tanggal Akad Nikah dan Tanggal Resepsi : 23 Mei 2026 Jam 12.00 - 14.00
+13 PCS : Tanpa Tanggal Akad Nikah dan Tanggal Resepsi : 23 Mei 2026 Jam 10.00 - 14.00
+
+Nama Yang di dahulukan (Pria/Wanita) : Pria
+
+Data Mempelai Perempuan
+Nama lengkap :  drh. Shafira Salwa Salsabil
+Nama Panggilan : Fira
+Putri Ke : 1 (Anak ke 2)
+Nama Orang Tua : Bapak Ainur Farid (Alm.) & Ibu Tri Endang Wahyuni
+
+Data Mempelai Pria 
+Nama lengkap : Hafizh Maulana ST.
+Nama Panggilan : Hafizh
+Putra Ke : 1 (Anak ke 1)
+Nama Orang Tua : Bapak Subagyo & Ibu Rachma Savira Hesti
+
+RESEPSI 
+Hari & Tanggal : 23 Mei 2026 
+12 PCS : Waktu : 12.00-14.00
+13 PCS : Waktu : 10.00-14.00 
+Tempat : Perumahan Dian Anyar Blok F2 No.7 Ciseureuh, Kec. Purwakarta, Kabupaten Purwakarta, Jawa Barat
+
+Link google Maps : https://maps.app.goo.gl/JWpjCgQ8SBkaqiS46
+
+List Nama Tamu Undangan 25 PCS:
+1. Mr. Srikkanth di Tempat
+2. Mr. Atul Kumar Singh di Tempat
+3. Mr. Runtla Yogesh di Tempat
+4. Mr. Chandel sanjive di Tempat
+5. Mr. Vinod Vergese di Tempat
+6. Mr. Anil Jain di Tempat
+7. Mr. Anupam Sukla di Tempat
+8. Mr. Amit Jain di Tempat
+9. Kak Eki dan keluarga di Karawang
+10. Drh Rizqi  di Tempat
+11. Drh Shila  di Tempat
+12. Tim Cat and Fun Niaga  di Tempat
+13. Tim Cat and Fun Galuhmas  di Tempat
+14-25. (dikosongkan) di tempat
+
+
+
+
+
+
+
+    // {
+    //     "thumb": "https://yavuzceliker.github.io/sample-images/image-1021.jpg",
+    //     "full": "https://yavuzceliker.github.io/sample-images/image-1021.jpg"
+    // }
