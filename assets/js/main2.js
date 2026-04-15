@@ -50,11 +50,17 @@
   }
   // MODE 3: Query param (?tipe=1&nama=hafizh)
   const url = new URL(window.location.href);
+  if (url.searchParams.has('t')) {
+    tipe = Number(url.searchParams.get('t'));
+  }
   if (url.searchParams.has('tipe')) {
     tipe = Number(url.searchParams.get('tipe'));
   }
-  if (url.searchParams.has('nama')) {
-    nama = url.searchParams.get('nama');
+  if (url.searchParams.has('n')) {
+    nama = url.searchParams.get('n');
+  }
+  if (url.searchParams.has('name')) {
+    nama = url.searchParams.get('name');
   }
   // Tentukan jam berdasarkan tipe
   let jam = '';
