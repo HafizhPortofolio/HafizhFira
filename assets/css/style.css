@@ -10,47 +10,47 @@
 
 
 :root {
-  /* --- ELEGANT PALETTE: CHAMPAGNE & CHARCOAL --- */
-  
-  /* Backgrounds: Cool Ivory & White (Bersih) */
-  --bg: #FAFAF8;          /* Cool White / Ivory */
-  --cream: #FFFFFF;       /* Pure White */
-  --beige: #F4F4F2;       /* Light Greyish White */
-  --pink-soft: #F9F9F9;   /* Off White */
-  --latte: #EAEAEA;       /* Light Grey */
+            /* --- ELEGANT PALETTE: SAGE & MINT --- */
 
-  /* Typography: Soft Charcoal (Bukan Hitam Pekat) */
-  --text: #333333;        /* Dark Grey */
-  --text-light: #777777;  /* Medium Grey */
-  
-  /* Accents: Champagne Gold (Muted, bukan Kuning) */
-  --mocha-dark: #1A1A1A;  /* Almost Black / Charcoal */
-  --mocha-medium: #444444;/* Dark Grey */
-  --mocha-light: #888888; /* Grey */
-  
-  /* Warna Utama Emas */
-  --pink-accent: #C5A059; /* Champagne Gold */
-  --pink-medium: #D4AF37; /* Classic Gold */
-  
-  /* Secondary Accents */
-  --rose: #B0A080;        /* Muted Bronze/Taupe */
-  --rose-gold: #D8CFC0;   /* Pale Champagne */
-  --rose-dark: #8C7B64;   /* Dark Bronze */
-  
-  /* --- SEMANTIC MAPPING --- */
-  --primary: var(--mocha-medium);
-  --secondary: var(--pink-soft);
-  --accent: var(--pink-accent);
-  --white: #FFFFFF;
+            /* Backgrounds: Cool Mint & White (Bersih) */
+            --bg: #F1F8F5;          /* Mint White / Very Pale Green */
+            --cream: #FFFFFF;       /* Pure White */
+            --beige: #E8F5E9;       /* Light Greenish White */
+            --pink-soft: #F3F9F6;   /* Off White (Tinted Green) */
+            --latte: #E0ECE6;       /* Light Sage Grey */
 
-  /* --- EFFECTS (More Subtle) --- */
-  --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.03);
-  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.06);
-  
-  /* Transitions lebih smooth untuk kesan mahal */
-  --transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
+            /* Typography: Dark Forest Green (Bukan Hitam Pekat) */
+            --text: #2F4F4F;        /* Dark Slate Gray/Green */
+            --text-light: #607D6E;  /* Medium Sage Grey */
+
+            /* Accents: Sage Green (Gantikan Gold) */
+            --mocha-dark: #1A3C34;  /* Deep Forest Green */
+            --mocha-medium: #2E7D32;/* Dark Green */
+            --mocha-light: #6B9B7A; /* Sage Grey */
+
+            /* Warna Utama Hijau Pastel */
+            --pink-accent: #6B9B7A; /* Sage Green (Main Accent) */
+            --pink-medium: #8FBFA9; /* Light Pastel Green */
+
+            /* Secondary Accents (Rose Gold diganti Olive/Dusty Green) */
+            --rose: #8AA89E;        /* Dusty Green/Teal */
+            --rose-gold: #D1E6DE;   /* Pale Mint */
+            --rose-dark: #5E7B70;   /* Darker Sage */
+
+            /* --- SEMANTIC MAPPING --- */
+            --primary: var(--mocha-medium);
+            --secondary: var(--pink-soft);
+            --accent: var(--pink-accent);
+            --white: #FFFFFF;
+
+            /* --- EFFECTS --- */
+            --shadow-sm: 0 4px 20px rgba(47, 79, 79, 0.05); /* Adjusted shadow tint */
+            --shadow-md: 0 10px 30px rgba(47, 79, 79, 0.08);
+            --shadow-lg: 0 20px 50px rgba(47, 79, 79, 0.1);
+
+            /* Transitions */
+            --transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
 
 /* ========================================
    🎯 BASE STYLES
@@ -308,7 +308,8 @@ iframe {
   z-index: 0;
 }
 .env-flap::after {
-  content: '💕';
+  /* content: '💕'; */
+  content: '🌿';
   position: absolute;
   bottom: -24px;
   left: 50%;
