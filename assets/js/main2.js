@@ -39,20 +39,39 @@
   let nama = 'Tamu Undangan';
   let tipe_tanggal = 0;
   const path = window.location.pathname.split('/').filter(Boolean);
-  // MODE 1: /tipe/nama
+  // MODE PATH
   if (path.length >= 2 && !path[0].includes('.html')) {
     tipe = Number(path[0]);
     nama = decodeURIComponent(path[1]);
   }
-  // MODE 2: /index.html/tipe/nama
-  if (path.length >= 3 && path[0].includes('.html')) {
+
+  // MODE index.html
+  else if (path.length >= 3 && path[0].includes('.html')) {
     tipe = Number(path[1]);
     nama = decodeURIComponent(path[2]);
   }
-  // MODE 3: Query param (?tipe=1&nama=hafizh)
-  const url = new URL(window.location.href);
-  if (url.searchParams.has('t')) {
+
+  // MODE QUERY NORMAL
+  else if (url.searchParams.has('t')) {
     tipe = Number(url.searchParams.get('t'));
+    nama = url.searchParams.get('nama');
+  }
+
+  // MODE QUERY ANEH: ?/1/Gordon
+  else if (url.search.startsWith('?/')) {
+    const parts = url.search.slice(2).split('/');
+    if (parts.length >= 2) {
+      tipe = Number(parts[0]);
+      nama = decodeURIComponent(parts[1]);
+    }
+  }
+  // handle ?1/Gordon
+  else if (/^\?\d+\/.+/.test(url.search)) {
+    const parts = url.search.slice(1).split('/');
+    if (parts.length >= 2) {
+      tipe = Number(parts[0]);
+      nama = decodeURIComponent(parts[1]);
+    }
   }
   if (url.searchParams.has('tipe')) {
     tipe = Number(url.searchParams.get('tipe'));
