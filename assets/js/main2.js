@@ -37,6 +37,7 @@
 (function initSlug() {
   let tipe = 0;
   let nama = 'Tamu Undangan';
+  let tipe_tanggal = 0;
   const path = window.location.pathname.split('/').filter(Boolean);
   // MODE 1: /tipe/nama
   if (path.length >= 2 && !path[0].includes('.html')) {
@@ -62,12 +63,25 @@
   if (url.searchParams.has('name')) {
     nama = url.searchParams.get('name');
   }
+  if (url.searchParams.has('d')) {
+    tipe_tanggal = url.searchParams.get('d');
+  }
+  if (url.searchParams.has('date')) {
+    tipe_tanggal = url.searchParams.get('date');
+  }
   // Tentukan jam berdasarkan tipe
   let jam = '';
   if (tipe === 1) jam = '10:00 - 12:00 WIB';
   else if (tipe === 2) jam = '12:00 - 15:00 WIB';
   else if (tipe === 3) jam = '10:00 - 15:00 WIB';
   else jam = '10:00 WIB - Selesai';
+
+  // Tentukan tanggal berdasarkan tipe
+  let tanggal = '';
+  if (tipe_tanggal === 1) tanggal = 'Sabtu, 16 Mei 2026';
+  else if (tipe_tanggal === 2) tanggal = `Jum'at, 15 Mei 2026`;
+  else if (tipe_tanggal === 3) tanggal = 'Sabtu, 23 Mei 2026';
+  else tanggal = tipe_tanggal;
   // Apply ke semua element dengan id #namaTamu
   document.querySelectorAll('#namaTamu').forEach((el) => {
     el.textContent = nama;
@@ -79,6 +93,10 @@
   document.querySelectorAll('#waktuTamu').forEach((el) => {
     el.textContent = jam;
   });
+  // // Apply jam
+  // document.querySelectorAll('#tanggalTamu').forEach((el) => {
+  //   el.textContent = tanggal;
+  // });
 })();
 /* ===============================
    3. ENVELOPE INTERACTIVE ANIMATION
