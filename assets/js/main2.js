@@ -66,13 +66,13 @@
     }
   }
   // handle ?1/Gordon
-  else if (/^\?\d+\/.+/.test(url.search)) {
-    const parts = url.search.slice(1).split('/');
-    if (parts.length >= 2) {
-      tipe = Number(parts[0]);
-      nama = decodeURIComponent(parts[1]);
-    }
-  }
+  // else if (/^\?\d+\/.+/.test(url.search)) {
+  //   const parts = url.search.slice(1).split('/');
+  //   if (parts.length >= 2) {
+  //     tipe = Number(parts[0]);
+  //     nama = decodeURIComponent(parts[1]);
+  //   }
+  // }
   if (url.searchParams.has('tipe')) {
     tipe = Number(url.searchParams.get('tipe'));
   }
