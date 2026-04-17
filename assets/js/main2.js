@@ -104,7 +104,7 @@
   else tanggal = tipe_tanggal;
   // Apply ke semua element dengan id #namaTamu
   document.querySelectorAll('#namaTamu').forEach((el) => {
-    el.textContent = nama;
+    el.textContent = nama.replaceAll('+', ' ');
   });
   // Apply ke input komentar (readonly)
   const namaKomentar = document.querySelector('#komentarNama');
