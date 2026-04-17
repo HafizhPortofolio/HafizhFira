@@ -108,7 +108,7 @@
   });
   // Apply ke input komentar (readonly)
   const namaKomentar = document.querySelector('#komentarNama');
-  if (namaKomentar) namaKomentar.value = nama;
+  if (namaKomentar) namaKomentar.value = nama.replaceAll('+', ' ');
   // Apply jam
   document.querySelectorAll('#waktuTamu').forEach((el) => {
     el.textContent = jam;
