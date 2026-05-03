@@ -14,15 +14,17 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 # Webdriver Manager (Untuk mengatasi crash driver)
 from webdriver_manager.chrome import ChromeDriverManager
 
 # Google Sheets Imports
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from openpyxl import Workbook
 
 import os # Pastikan import os ada di paling atas
-
+# pip install openpyxl
 class WhatsAppBot:
     def __init__(self):
         """Initialize the WhatsApp bot with Chrome driver"""
@@ -214,7 +216,19 @@ class WhatsAppBot:
         except Exception as e:
             print(f"❌ Error reading Google Sheet: {e}")
             return None
-    
+    def create_excel_result(self):
+        self.excel_file = "hasil_kirim.xlsx"
+        self.workbook = Workbook()
+        self.sheet = self.workbook.active
+        self.sheet.title = "Result"
+        # Header Excel
+        self.sheet.append(["Name", "Phone", "Message", "Status", "Timestamp"])
+        # Simpan awal
+        self.workbook.save(self.excel_file)
+    def write_result(self, name, phone, message, status):
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.sheet.append([name, phone, message, status, timestamp])
+        self.workbook.save(self.excel_file)
     def format_message_with_variables(self, message, name=None, phone=None):
         """Format message template with dynamic variables"""
         try:
@@ -251,6 +265,7 @@ class WhatsAppBot:
 if __name__ == "__main__":
     # Initialize bot
     bot = WhatsAppBot()
+    bot.create_excel_result()
     
     try:
         # Step 1: Open WhatsApp Web
@@ -313,8 +328,10 @@ Terima kasih."""
                 success = bot.send_message(phone, final_msg)
                 if success:
                     successful_sends += 1
+                    bot.write_result(name, phone, final_msg, "Success")
                     print(f"✅ Success: {name}")
                 else:
+                    bot.write_result(name, phone, final_msg, "Failed")
                     print(f"❌ Failed: {name}")
                 
                 # Delay penting agar tidak di-ban
