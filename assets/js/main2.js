@@ -561,14 +561,15 @@ setTimeout(createConfetti, 1000);
 
     // 🔥 Tambahin QRIS ke data
     const qrisItem = {
-      bank: 'QRIS',
-      logo: 'assets/images/bank/qris.png',
-      number: '',
-      owner: '',
-      isQris: true,
+      // bank: 'QRIS',
+      // logo: 'assets/images/bank/qris.png',
+      // number: '',
+      // owner: '',
+      // isQris: true,
     };
 
-    const fullData = [...data, qrisItem];
+    // const fullData = [...data, qrisItem];
+    const fullData = [...data];
 
     // 🔥 DUPLICATE untuk infinite loop
     const loopData = [...fullData, ...fullData];
