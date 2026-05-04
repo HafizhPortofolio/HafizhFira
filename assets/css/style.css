@@ -3107,3 +3107,22 @@ button:disabled, input:disabled, textarea:disabled {
    ✅ END OF CSS FILE
 ======================================== */
 
+#giftTrack {
+  display: flex;
+  gap: 20px;
+  animation: scrollGift linear infinite;
+  animation-duration: 20s; /* default */
+}
+
+#giftTrack.gift-paused {
+  animation-play-state: paused;
+}
+
+@keyframes scrollGift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
