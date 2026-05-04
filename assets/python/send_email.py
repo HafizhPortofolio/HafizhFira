@@ -335,7 +335,7 @@ Terima kasih."""
                     print(f"❌ Failed: {name}")
                 
                 # Delay penting agar tidak di-ban
-                time.sleep(5) 
+                time.sleep(10) 
             else:
                 print(f"⚠️ Skipping row {i}: Missing phone or name data")
         

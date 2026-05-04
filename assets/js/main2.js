@@ -561,15 +561,16 @@ setTimeout(createConfetti, 1000);
 
     // 🔥 Tambahin QRIS ke data
     const qrisItem = {
-      // bank: 'QRIS',
-      // logo: 'assets/images/bank/qris.png',
-      // number: '',
-      // owner: '',
-      // isQris: true,
+      bank: 'QRIS',
+      logo: 'assets/images/bank/qris.png',
+      number: '',
+      owner: '',
+      isQris: true,
+      file_qris: 'assets/images/bank/qris_hafizh.jpeg',
     };
 
-    // const fullData = [...data, qrisItem];
-    const fullData = [...data];
+    const fullData = [...data, qrisItem];
+    // const fullData = [...data];
 
     // 🔥 DUPLICATE untuk infinite loop
     const loopData = [...fullData, ...fullData];
@@ -588,7 +589,7 @@ setTimeout(createConfetti, 1000);
             <h4>${item.bank}</h4>
             <p>Scan QRIS</p>
             </div>
-            <img src="${item.logo}" class="gift-logo qris-img glightbox-item">
+            <img src="${item.file_qris}" class="gift-logo qris-img glightbox-item">
         `;
       } else {
         card.innerHTML = `
