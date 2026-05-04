@@ -735,6 +735,19 @@
 
       // 0 = silent, 1 = full volume
       bgm.volume = 0.5;
+      // speed
+      let speed = 20; // detik (default lambat)
+
+      const giftTrack = document.getElementById('giftTrack');
+      const btnSpeed = document.getElementById('giftSpeedUp');
+
+      btnSpeed.addEventListener('click', () => {
+        speed -= 5; // makin kecil = makin cepat
+
+        if (speed < 5) speed = 5; // batas minimum biar nggak terlalu ngebut
+
+        giftTrack.style.animationDuration = speed + 's';
+      });
     </script>
   </body>
 </html>
