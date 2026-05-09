@@ -144,7 +144,7 @@ function initSlug() {
   if (tipe === 1) {
     waktuText = '10.00 WIB - 12.00 WIB';
   } else if (tipe === 2) {
-    waktuText = '13.00 WIB - 15.00 WIB';
+    waktuText = '12.00 WIB - 14.00 WIB';
   } else if (tipe === 3) {
     waktuText = '10.00 WIB - Selesai';
   } else if (tipe === 4) {
